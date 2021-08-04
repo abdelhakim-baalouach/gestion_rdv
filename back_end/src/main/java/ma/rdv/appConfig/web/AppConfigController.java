@@ -26,6 +26,7 @@ public class AppConfigController {
     @GetMapping("/appconfis")
     public ResponseEntity<Page<AppConfig>> getByType(
             @Or({
+                    @Spec(path="id", params="id", spec= Equal.class),
                     @Spec(path="typeEnum", params="typeEnum", spec= Equal.class),
             })  NotDeletedAppConfigSpec specification, Pageable pageable
     ) {
