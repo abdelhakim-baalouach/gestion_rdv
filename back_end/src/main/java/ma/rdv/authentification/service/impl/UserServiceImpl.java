@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public Page<User> getUsers(Specification<User> specification, Pageable pageable) {
-        log.info("Fetching users page {} and size ", pageable.getPageNumber(), pageable.getPageSize());
+        log.info("Fetching users page {} and size {}", pageable.getPageNumber(), pageable.getPageSize());
         return this.userRepository.findAll(specification, pageable);
     }
 
