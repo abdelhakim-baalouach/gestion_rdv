@@ -34,6 +34,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
 import { entityConfig } from './store/entity-metadata';
+import { reducers, metaReducers } from './reducers';
 
 registerLocaleData(fr);
 
@@ -64,7 +65,10 @@ registerLocaleData(fr);
     EffectsModule.forRoot([]),
     EntityDataModule.forRoot(entityConfig),
     NzDrawerModule,
-    NzTableModule
+    NzTableModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    })
   ],
   providers: [{ provide: NZ_I18N, useValue: fr_FR }, { provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [AppComponent]

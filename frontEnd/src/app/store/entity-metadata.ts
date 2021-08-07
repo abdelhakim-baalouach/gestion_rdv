@@ -10,7 +10,7 @@ const entityMetadata: EntityMetadataMap = {
 
 // because the plural of "hero" is not "heros"
 const pluralNames = {
-    Client: 'api/clients',
+    Client: 'clients',
 };
 
 export const entityConfig = {

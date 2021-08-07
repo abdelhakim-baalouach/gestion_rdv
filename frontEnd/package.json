@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -22,7 +22,7 @@
     "@ngrx/data": "^12.3.0",
     "@ngrx/effects": "^12.3.0",
     "@ngrx/entity": "^12.3.0",
-    "@ngrx/store": "^12.3.0",
+    "@ngrx/store": "^10.1.2",
     "ng-zorro-antd": "^10.2.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

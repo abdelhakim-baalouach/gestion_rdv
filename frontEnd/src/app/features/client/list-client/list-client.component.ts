@@ -12,10 +12,13 @@ import { ClientService } from 'src/app/core/service/client/client.service';
 export class ListClientComponent implements OnInit {
 
   clients: Client[] = []
-  totalElement: number = 0
+  totalElement: number = 10
   isLoading: boolean = true
 
-  pagination: Pagination
+  pagination: Pagination = {
+    page: 0,
+    size: 10
+  }
 
   data = [
     {
@@ -45,25 +48,28 @@ export class ListClientComponent implements OnInit {
   handle(selector, $event?) {
     switch (selector) {
       case "getClients":
+        let query = {
+          page: String(this.pagination.page),
+          size: String(this.pagination.size)
+        }
         this.clientService
-          .getWithQuery({ ...this.pagination.toString })
+          .getWithQuery(query)
           .subscribe(
             (success) => console.log(success),
             (failed) => console.log(failed.error)
           )
-        break;
-
-      default:
-        break;
+        break
     }
   }
 
   onQueryParamsChange(params: NzTableQueryParams) {
     this.pagination.size = params.pageSize
     this.pagination.page = params.pageIndex - 1
+    this.handle('getClients')
   }
 
   getNextPage() {
     this.pagination.page++
+    this.handle('getClients')
   }
 }

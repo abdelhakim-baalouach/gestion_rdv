@@ -1,5 +1,5 @@
 <nz-table #basicTable [nzData]="data" nzSize="small" nzShowSizeChanger [nzFrontPagination]="false"
-    [nzPageSize]="pagination.getSize" (nzQueryParams)="onQueryParamsChange($event)" [nzTotal]="totalElement"
+    [nzPageSize]="pagination.size" (nzQueryParams)="onQueryParamsChange($event)" [nzTotal]="totalElement"
     [nzLoading]="isLoading" nzSize="small" appAutoHeightTableDirective nzScroll="false" [nzBordered]="true">
     <thead>
         <tr>
