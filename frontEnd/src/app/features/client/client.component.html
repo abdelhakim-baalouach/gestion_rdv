@@ -1,0 +1,40 @@
+<div id="main-content">
+    <app-block-header [title]="'Client'" [currentPage]="'client'" (open)="handle('add', $event)"></app-block-header>
+    <app-add-client [isAdd]="isAdd" (close)="handle('add', $event)"></app-add-client>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12">
+                <div class="card planned_task">
+                    <div class="header">
+                        <h2>Gestion Client</h2>
+                        <ul class="header-dropdown dropdown">
+                            <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <nz-table #smallTable nzSize="small" [nzData]="data">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Age</th>
+                                        <th>Address</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of smallTable.data">
+                                        <td>{{ data.name }}</td>
+                                        <td>{{ data.age }}</td>
+                                        <td>{{ data.address }}</td>
+                                    </tr>
+                                </tbody>
+                            </nz-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

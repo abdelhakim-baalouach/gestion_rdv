@@ -1,0 +1,12 @@
+<ng-container *ngIf="href == '/login'">
+    <router-outlet></router-outlet>
+</ng-container>
+<ng-container *ngIf="href != '/login'">
+    <!-- Overlay For Sidebars -->
+    <div class="overlay"></div>
+    <div id="wrapper">
+        <app-navbar></app-navbar>
+        <app-menu></app-menu>
+        <router-outlet></router-outlet>
+    </div>
+</ng-container>
