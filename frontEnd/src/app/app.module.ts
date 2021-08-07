@@ -25,7 +25,15 @@ import { AddClientComponent } from './features/client/add-client/add-client.comp
 
 import { NzDrawerModule } from 'ng-zorro-antd/drawer';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { ListClientComponent } from './features/client/list-client/list-client.component';
 
+/**
+ *  NgRx
+ */
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
+import { entityConfig } from './store/entity-metadata';
 
 registerLocaleData(fr);
 
@@ -43,7 +51,8 @@ registerLocaleData(fr);
     SecteurComponent,
     UtilisateurComponent,
     BlockHeaderComponent,
-    AddClientComponent
+    AddClientComponent,
+    ListClientComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +60,9 @@ registerLocaleData(fr);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    EntityDataModule.forRoot(entityConfig),
     NzDrawerModule,
     NzTableModule
   ],
