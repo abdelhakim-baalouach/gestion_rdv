@@ -1,0 +1,18 @@
+<nz-table #basicTable [nzData]="data" nzSize="small" nzShowSizeChanger [nzFrontPagination]="false"
+    [nzPageSize]="pagination.getSize" (nzQueryParams)="onQueryParamsChange($event)" [nzTotal]="totalElement"
+    [nzLoading]="isLoading" nzSize="small" appAutoHeightTableDirective nzScroll="false" [nzBordered]="true">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data">
+            <td>{{ data.name }}</td>
+            <td>{{ data.age }}</td>
+            <td>{{ data.address }}</td>
+        </tr>
+    </tbody>
+</nz-table>
