@@ -35,6 +35,7 @@ import { StoreModule } from '@ngrx/store';
 import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
 import { entityConfig } from './store/entity-metadata';
 import { reducers, metaReducers } from './reducers';
+import { authInterceptorProviders } from './core/service/auth.interceptor';
 
 registerLocaleData(fr);
 
@@ -70,7 +71,7 @@ registerLocaleData(fr);
       metaReducers
     })
   ],
-  providers: [{ provide: NZ_I18N, useValue: fr_FR }, { provide: APP_BASE_HREF, useValue: '/' }],
+  providers: [authInterceptorProviders, { provide: NZ_I18N, useValue: fr_FR }, { provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

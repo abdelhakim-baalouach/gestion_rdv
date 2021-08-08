@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Authentification } from 'src/app/core/model/_helper/_helper.model';
+import { AuthService } from 'src/app/core/service/authentification/auth.service';
 
 @Component({
   selector: 'app-authentication',
@@ -6,10 +8,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./authentication.component.css']
 })
 export class AuthenticationComponent implements OnInit {
+  auth: Authentification
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  handle(selector) {
+    switch (selector) {
+      case 'login':
+        this.auth = {
+          username: "role_admin",
+          password: "1234"
+        }
+
+        this.authService
+          .login(this.auth)
+          .subscribe(
+            (success) => console.log(success),
+            (failed) => console.log(failed.status)
+          )
+        break
+
+      default:
+        break;
+    }
   }
 
 }
