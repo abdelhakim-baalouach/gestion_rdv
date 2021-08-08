@@ -19,13 +19,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("clients")
 @RequiredArgsConstructor
 public class ClientController {
 
     private final ClientService clientService;
 
-    @GetMapping("/clients")
+    @GetMapping
     public ResponseEntity<Page<Client>> getByType(
             @Or({
                     @Spec(path="id", params="id", spec= Equal.class),
@@ -36,21 +36,21 @@ public class ClientController {
                 .body(this.clientService.getAllClient(specification, pageable));
     }
 
-    @PostMapping("/clients")
+    @PostMapping
     public ResponseEntity<Client> save(@RequestBody Client client) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/clients").toUriString());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/clients").toUriString());
         return ResponseEntity
                 .created(uri).body(this.clientService.save(client));
     }
 
-    @PutMapping("/clients")
+    @PutMapping
     public ResponseEntity<Client> update(@RequestBody Client client) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/clients").toUriString());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/clients").toUriString());
         return ResponseEntity
                 .created(uri).body(this.clientService.update(client));
     }
 
-    @DeleteMapping("/clients/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         this.clientService.delete(id);
         return ResponseEntity.ok().build();

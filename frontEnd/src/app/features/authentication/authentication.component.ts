@@ -25,12 +25,7 @@ export class AuthenticationComponent implements OnInit {
           password: "1234"
         }
 
-        this.authService
-          .login(this.auth)
-          .subscribe(
-            (success) => console.log(success),
-            (failed) => console.log(failed.status)
-          )
+        this.authService.loggedIn(this.auth)
         break
 
       default:

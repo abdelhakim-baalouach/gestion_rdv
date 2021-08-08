@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void addRoleToUser(RoleToUserRequest roleToUserRequest) {
         log.info("Adding role {} to user {}", roleToUserRequest.getRoleName(), roleToUserRequest.getUsername());
-        User user = this.userRepository.findByUsername(roleToUserRequest.getUsername());
+        User user = this.userRepository.findByUsernameAndState(roleToUserRequest.getUsername(), StateEnum.ACTIVE);
         Role role = this.roleRepository.findByName(roleToUserRequest.getRoleName());
         user.getRoles().add(role);
     }
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User getUser(String username) {
         log.info("Fetching user {} ", username);
-        return this.userRepository.findByUsername(username);
+        return this.userRepository.findByUsernameAndState(username, StateEnum.ACTIVE);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = this.userRepository.findByUsername(username);
+        User user = this.userRepository.findByUsernameAndState(username, StateEnum.ACTIVE);
         if (user == null) {
             log.error("User not found in the database");
             throw new UsernameNotFoundException("User not found in the database");

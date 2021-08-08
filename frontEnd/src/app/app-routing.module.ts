@@ -19,12 +19,6 @@ const routes: Routes = [
   { path: 'secteur', component: SecteurComponent },
   { path: 'utilisateur', component: UtilisateurComponent },
   { path: '**', component: PageNotFoundComponent },
-
-
-
-
-
-
 ];
 
 @NgModule({

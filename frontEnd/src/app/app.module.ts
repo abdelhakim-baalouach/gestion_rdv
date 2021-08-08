@@ -32,10 +32,15 @@ import { ListClientComponent } from './features/client/list-client/list-client.c
  */
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { DefaultDataServiceConfig, EntityDataModule } from '@ngrx/data';
+import { DefaultDataServiceConfig, EntityCollectionReducerMethodsFactory, EntityDataModule, EntityDataService, PersistenceResultHandler } from '@ngrx/data';
 import { entityConfig } from './store/entity-metadata';
 import { reducers, metaReducers } from './reducers';
 import { authInterceptorProviders } from './core/service/auth.interceptor';
+import { StoreRouterConnectingModule } from '@ngrx/router-store'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { environment } from 'src/environments/environment';
+import { AdditionalPersistenceResultHandler } from './store/entity/additional-persistence-result-handler';
+import { AdditionalEntityCollectionReducerMethodsFactory } from './store/entity/additional-entity-collection-reducer-methodsfactory';
 
 registerLocaleData(fr);
 
@@ -62,16 +67,27 @@ registerLocaleData(fr);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot(),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EntityDataModule.forRoot(entityConfig),
     NzDrawerModule,
-    NzTableModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers
-    })
+    NzTableModule
   ],
-  providers: [authInterceptorProviders, { provide: NZ_I18N, useValue: fr_FR }, { provide: APP_BASE_HREF, useValue: '/' }],
+  providers: [
+    authInterceptorProviders,
+    { provide: NZ_I18N, useValue: fr_FR },
+    { provide: APP_BASE_HREF, useValue: '/' },
+    { provide: PersistenceResultHandler, useClass: AdditionalPersistenceResultHandler },
+    {
+      provide: EntityCollectionReducerMethodsFactory,
+      useClass: AdditionalEntityCollectionReducerMethodsFactory,
+    },
+
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(entityDataService: EntityDataService) { }
+}

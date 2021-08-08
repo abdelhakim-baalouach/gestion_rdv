@@ -10,32 +10,32 @@
                                 <span>Dashboard</span>
                             </a>
                         </li>
-                        <li class="header">Configuration</li>
-                        <li routerLinkActive="active">
+                        <li class="header" *ngIf="handle('isHaveRole', 'ROLE_ADMIN')">Configuration</li>
+                        <li routerLinkActive="active" *ngIf="handle('isHaveRole', 'ROLE_ADMIN')">
                             <a routerLink="canal">
                                 <i class="icon-bubbles"></i>
                                 <span>Canal</span>
                             </a>
                         </li>
-                        <li routerLinkActive="active">
+                        <li routerLinkActive="active" *ngIf="handle('isHaveRole', 'ROLE_ADMIN')">
                             <a routerLink="client">
                                 <i class="icon-bubbles"></i>
                                 <span>Client</span>
                             </a>
                         </li>
-                        <li routerLinkActive="active">
+                        <li routerLinkActive="active" *ngIf="handle('isHaveRole', 'ROLE_ADMIN')">
                             <a routerLink="type-rdv">
                                 <i class="icon-calendar"></i>
                                 <span>Type RDV</span>
                             </a>
                         </li>
-                        <li routerLinkActive="active">
+                        <li routerLinkActive="active" *ngIf="handle('isHaveRole', 'ROLE_ADMIN')">
                             <a routerLink="secteur">
                                 <i class="icon-book-open"></i>
                                 <span>Secteur</span>
                             </a>
                         </li>
-                        <li routerLinkActive="active">
+                        <li routerLinkActive="active" *ngIf="handle('isHaveRole', 'ROLE_ADMIN')">
                             <a routerLink="utilisateur">
                                 <i class="icon-check"></i>
                                 <span>Utilisateur</span>
