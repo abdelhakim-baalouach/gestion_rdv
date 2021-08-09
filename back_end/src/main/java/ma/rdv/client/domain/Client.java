@@ -20,6 +20,7 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nomContact;
+    private String telephone;
     private String adresse;
     private String chiffreAffaire;
 

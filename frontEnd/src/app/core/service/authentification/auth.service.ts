@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { Authentification } from '../../model/_helper/_helper.model';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { User } from '../../model/user/user.model';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +19,12 @@ export class AuthService {
     "200": "La Connexion Établie Avec Succès",
     "504": "504 Gateway Timeout"
   }
-  currentUser: User = {
-    username: null,
-    roles: []
-  }
+  currentUser: User = { username: null, roles: [] }
 
   constructor(
-    private _http: HttpClient
+    private _http: HttpClient,
+    private router: Router,
+    private messageService: NzMessageService
   ) { }
 
   login(auth: Authentification): Observable<any> {
@@ -43,28 +44,40 @@ export class AuthService {
     this.login(auth)
       .subscribe(
         (success) => {
-          const decodedToken = this.helper.decodeToken(success.access_token);
-          this.currentUser.username = decodedToken.sub
-          this.currentUser.roles = decodedToken.roles
-          console.log(this.currentUser)
-
+          //const decodedToken = this.helper.decodeToken(success.access_token);
+          //this.currentUser.username = decodedToken.sub
+          //this.currentUser.roles = decodedToken.roles
           localStorage.setItem("token", success.access_token)
+          this.messageService.success(this.message["200"])
+          this.router.navigate(['gestion-rdv'])
         },
-        (failed) => { console.log(failed.status) }
+        (failed) => {
+          this.messageService.warning(this.message[failed.status])
+        }
       )
   }
 
   isLoggedIn(): boolean {
     const token = localStorage.getItem("token")
     return !this.helper.isTokenExpired(token);
-
   }
 
   isHaveRole(roleName: String): boolean {
-    return this.currentUser.roles.find(role => role == roleName)
+    if (this.getRoles().find(role => role == roleName)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  getRoles(): [] {
+    const token = localStorage.getItem("token")
+    const decodedToken = this.helper.decodeToken(token)
+    return decodedToken.roles
   }
 
   logout() {
     localStorage.removeItem('token')
+    this.router.navigate(['login'])
   }
 }

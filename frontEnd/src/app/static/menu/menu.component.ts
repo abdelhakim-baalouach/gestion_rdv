@@ -7,6 +7,7 @@ import { AuthService } from 'src/app/core/service/authentification/auth.service'
   styleUrls: []
 })
 export class MenuComponent implements OnInit {
+  isHasConfig: boolean = false
 
   constructor(
     private authService: AuthService
@@ -15,12 +16,10 @@ export class MenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handle(selector, $event?) {
-    switch (selector) {
-      case "isHaveRole":
-        this.authService.isHaveRole($event)
-        break
-    }
+  isHavePermission($event): boolean {
+    const isTrue = this.authService.isHaveRole($event)
+    if (isTrue) this.isHasConfig = true
+    return isTrue
   }
 
 }

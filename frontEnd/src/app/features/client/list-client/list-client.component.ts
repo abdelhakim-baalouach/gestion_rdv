@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { Client } from 'src/app/core/model/client/client.model';
 import { Pagination } from 'src/app/core/model/_helper/_helper.model';
@@ -20,26 +21,9 @@ export class ListClientComponent implements OnInit {
     size: 10
   }
 
-  data = [
-    {
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park'
-    },
-    {
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park'
-    },
-    {
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park'
-    }
-  ];
-
   constructor(
-    private clientService: ClientService
+    private clientService: ClientService,
+    private store: Store<any>,
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +31,12 @@ export class ListClientComponent implements OnInit {
 
   handle(selector, $event?) {
     switch (selector) {
+      case "getTotalElement":
+        this.store.subscribe(state => {
+          this.totalElement = state.entityCache.Client.totalElements
+        })
+
+        break
       case "getClients":
         let query = {
           page: String(this.pagination.page),
@@ -55,7 +45,7 @@ export class ListClientComponent implements OnInit {
         this.clientService
           .getWithQuery(query)
           .subscribe(
-            (success) => console.log(success),
+            (success) => this.clients = success,
             (failed) => console.log(failed.error)
           )
         break

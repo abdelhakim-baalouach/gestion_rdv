@@ -1,18 +1,20 @@
-<nz-table #basicTable [nzData]="data" nzSize="small" nzShowSizeChanger [nzFrontPagination]="false"
+<nz-table #basicTable [nzData]="clients" nzSize="small" nzShowSizeChanger [nzFrontPagination]="false"
     [nzPageSize]="pagination.size" (nzQueryParams)="onQueryParamsChange($event)" [nzTotal]="totalElement"
     [nzLoading]="isLoading" nzSize="small" appAutoHeightTableDirective nzScroll="false" [nzBordered]="true">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Address</th>
+            <th class="text-capitalize">Nom de contact</th>
+            <th class="text-capitalize">Téléphone</th>
+            <th class="text-capitalize">Addresse</th>
+            <th class="text-capitalize">Chiffre d'affaire</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let data of basicTable.data">
-            <td>{{ data.name }}</td>
-            <td>{{ data.age }}</td>
-            <td>{{ data.address }}</td>
+            <td>{{ data.nomContact }}</td>
+            <td>{{ data.telephone }}</td>
+            <td>{{ data.adresse }}</td>
+            <td>{{ data.chiffreAffaire }}</td>
         </tr>
     </tbody>
 </nz-table>
