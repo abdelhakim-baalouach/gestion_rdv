@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'app-client',
   templateUrl: './client.component.html',
-  styleUrls: ['./client.component.css']
+  styleUrls: []
 })
 export class ClientComponent implements OnInit {
   isAdd: boolean = false

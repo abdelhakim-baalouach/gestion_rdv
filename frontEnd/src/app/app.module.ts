@@ -94,6 +94,7 @@ import { BlockHeaderComponent } from './static/block-header/block-header.compone
 import { AddClientComponent } from './features/client/add-client/add-client.component';
 import { ListClientComponent } from './features/client/list-client/list-client.component';
 import { UpdateClientComponent } from './features/client/update-client/update-client.component';
+import { SearchComponent } from './static/search/search.component';
 
 
 @NgModule({
@@ -112,7 +113,8 @@ import { UpdateClientComponent } from './features/client/update-client/update-cl
     BlockHeaderComponent,
     AddClientComponent,
     ListClientComponent,
-    UpdateClientComponent
+    UpdateClientComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

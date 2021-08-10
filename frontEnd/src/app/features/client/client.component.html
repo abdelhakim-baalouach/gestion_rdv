@@ -1,5 +1,6 @@
 <div id="main-content">
-    <app-block-header [title]="'Client'" [currentPage]="'client'" (open)="handle('add', $event)"></app-block-header>
+    <app-block-header [title]="'Client'" [roleName]="'ROLE_CLIENT_ADD'" [currentPage]="'client'"
+        (open)="handle('add', $event)"></app-block-header>
     <app-add-client [isAdd]="isAdd" (close)="handle('add', $event)"></app-add-client>
     <div class="container-fluid">
         <div class="row clearfix">

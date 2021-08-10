@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Authentification } from '../../model/_helper/_helper.model';
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { User } from '../../model/user/user.model';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Router } from '@angular/router';
 
@@ -19,7 +18,6 @@ export class AuthService {
     "200": "La Connexion Établie Avec Succès",
     "504": "504 Gateway Timeout"
   }
-  currentUser: User = { username: null, roles: [] }
 
   constructor(
     private _http: HttpClient,
@@ -44,9 +42,6 @@ export class AuthService {
     this.login(auth)
       .subscribe(
         (success) => {
-          //const decodedToken = this.helper.decodeToken(success.access_token);
-          //this.currentUser.username = decodedToken.sub
-          //this.currentUser.roles = decodedToken.roles
           localStorage.setItem("token", success.access_token)
           this.messageService.success(this.message["200"])
           this.router.navigate(['gestion-rdv'])
@@ -59,7 +54,7 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     const token = localStorage.getItem("token")
-    return !this.helper.isTokenExpired(token);
+    return !this.helper.isTokenExpired(token)
   }
 
   isHaveRole(roleName: String): boolean {
@@ -68,6 +63,12 @@ export class AuthService {
     } else {
       return false
     }
+  }
+
+  getUsername() {
+    const token = localStorage.getItem("token")
+    const decodedToken = this.helper.decodeToken(token);
+    return decodedToken.sub
   }
 
   getRoles(): [] {

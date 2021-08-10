@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AuthService } from 'src/app/core/service/authentification/auth.service';
 
 @Component({
   selector: 'app-block-header',
@@ -7,12 +8,18 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class BlockHeaderComponent implements OnInit {
   @Input() title: string
+  @Input() roleName: string
   @Input() currentPage: string
   @Output() open = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
   }
 
+  isHavePermission($event): boolean {
+    return this.authService.isHaveRole($event)
+  }
 }

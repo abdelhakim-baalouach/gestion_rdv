@@ -11,31 +11,31 @@
                             </a>
                         </li>
                         <li class="header" *ngIf="isHasConfig === true">Configuration</li>
-                        <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_ADMIN') === true">
+                        <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_CANAL') === true">
                             <a routerLink="canal">
                                 <i class="fa  fa-cogs"></i>
                                 <span>Canal</span>
                             </a>
                         </li>
-                        <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_ADMIN') === true">
+                        <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_CLIENT') === true">
                             <a routerLink="client">
                                 <i class="fa fa-address-card"></i>
                                 <span>Client</span>
                             </a>
                         </li>
-                        <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_ADMIN') === true">
+                        <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_TYPE_RDV') === true">
                             <a routerLink="type-rdv">
                                 <i class="icon-calendar"></i>
                                 <span>Type RDV</span>
                             </a>
                         </li>
-                        <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_ADMIN') === true">
+                        <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_SECTEUR') === true">
                             <a routerLink="secteur">
                                 <i class="fa fa-building"></i>
                                 <span>Secteur</span>
                             </a>
                         </li>
-                        <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_ADMIN') === true">
+                        <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_USER') === true">
                             <a routerLink="utilisateur">
                                 <i class="fa fa-users"></i>
                                 <span>Utilisateur</span>

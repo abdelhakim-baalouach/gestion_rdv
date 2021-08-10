@@ -4,7 +4,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzTableQueryParams } from 'ng-zorro-antd/table';
 import { Observable, Subscription } from 'rxjs';
 import { Client } from 'src/app/core/model/client/client.model';
-import { Items, Pagination } from 'src/app/core/model/_helper/_helper.model';
+import { Pagination } from 'src/app/core/model/_helper/_helper.model';
+import { AuthService } from 'src/app/core/service/authentification/auth.service';
 import { ClientService } from 'src/app/core/service/client/client.service';
 
 @Component({
@@ -18,20 +19,24 @@ export class ListClientComponent implements OnInit {
   private eventsSubscription: Subscription
   clients: Client[] = []
   client: Client
-  items: Items = { totalElement: 0, isLoading: true }
+  totalElement: number = 10
+  isLoading: boolean = true
   isUpdate: boolean = false
-
-  pagination: Pagination = { page: 0, size: 10 }
+  isHaveOne: boolean = false
+  page: number = 0
+  size: number = 10
 
   constructor(
+    private authService: AuthService,
     private clientService: ClientService,
     private store: Store<any>,
     private message: NzMessageService
   ) { }
 
   ngOnInit(): void {
+    this.isHaveOnePermission()
     this.eventsSubscription = this.events.subscribe(() => {
-      this.items.isLoading = false
+      this.isLoading = false
       this.handle('getClients')
     })
   }
@@ -42,24 +47,22 @@ export class ListClientComponent implements OnInit {
         this.isUpdate = $event
         this.client = $data
         if (!$event) {
-          this.items.isLoading = false
+          this.isLoading = false
           this.handle('getClients')
         }
         break
 
       case "getInStore":
         this.store.subscribe(state => {
-          this.items = {
-            totalElement: state.entityCache.Client.totalElements,
-            isLoading: state.entityCache.Client.loading
-          }
+          this.totalElement = state.entityCache.Client.totalElements
+          this.isLoading = state.entityCache.Client.loading
         })
         break
 
       case "getClients":
         let query = {
-          page: String(this.pagination.page),
-          size: String(this.pagination.size)
+          page: String(this.page),
+          size: String(this.size)
         }
         this.clientService
           .getWithQuery(query)
@@ -78,8 +81,26 @@ export class ListClientComponent implements OnInit {
           .subscribe(
             () => {
               this.message.success("Le client a été supprimé avec succès")
-              this.items.isLoading = false
+              this.isLoading = false
               this.handle('getClients')
+            },
+            (failed) => this.message.error(failed.error)
+          )
+        break
+
+      case "search":
+        const search = {
+          nomContact: $event,
+          page: String(this.page),
+          size: String(this.size)
+        }
+        this.clientService
+          .getWithQuery({ ...search })
+          .subscribe(
+            (success) => {
+              console.log(success);
+              this.clients = success
+              this.handle('getInStore')
             },
             (failed) => this.message.error(failed.error)
           )
@@ -87,16 +108,30 @@ export class ListClientComponent implements OnInit {
     }
   }
 
+  isHavePermission($event): boolean {
+    return this.authService.isHaveRole($event)
+  }
+
+  isHaveOnePermission() {
+    if (this.authService.isHaveRole('ROLE_CLIENT_UPDATE')) {
+      this.isHaveOne = true
+    }
+
+    if (this.authService.isHaveRole('ROLE_CLIENT_DELETE')) {
+      this.isHaveOne = true
+    }
+  }
+
   onQueryParamsChange(params: NzTableQueryParams) {
-    this.pagination.size = params.pageSize
-    this.pagination.page = params.pageIndex - 1
-    this.items.isLoading = false
+    this.size = params.pageSize
+    this.page = params.pageIndex - 1
+    this.isLoading = false
     this.handle('getClients')
   }
 
   getNextPage() {
-    this.pagination.page++
-    this.items.isLoading = false
+    this.page++
+    this.isLoading = false
     this.handle('getClients')
   }
 
