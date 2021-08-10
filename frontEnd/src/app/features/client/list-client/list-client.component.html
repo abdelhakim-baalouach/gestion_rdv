@@ -1,12 +1,16 @@
+<ng-container *ngIf="isUpdate">
+    <app-update-client [client]="client" [isUpdate]="isUpdate" (close)="handle('isUpdate', $event)"></app-update-client>
+</ng-container>
 <nz-table #basicTable [nzData]="clients" nzSize="small" nzShowSizeChanger [nzFrontPagination]="false"
-    [nzPageSize]="pagination.size" (nzQueryParams)="onQueryParamsChange($event)" [nzTotal]="totalElement"
-    [nzLoading]="isLoading" nzSize="small" appAutoHeightTableDirective nzScroll="false" [nzBordered]="true">
+    [nzPageSize]="pagination.size" (nzQueryParams)="onQueryParamsChange($event)" [nzTotal]="items.isLoading"
+    [nzLoading]="items.isLoading" nzSize="small" appAutoHeightTableDirective nzScroll="false" [nzBordered]="true">
     <thead>
         <tr>
             <th class="text-capitalize">Nom de contact</th>
             <th class="text-capitalize">Téléphone</th>
             <th class="text-capitalize">Addresse</th>
             <th class="text-capitalize">Chiffre d'affaire</th>
+            <th nzWidth="30px" nzRight></th>
         </tr>
     </thead>
     <tbody>
@@ -15,6 +19,22 @@
             <td>{{ data.telephone }}</td>
             <td>{{ data.adresse }}</td>
             <td>{{ data.chiffreAffaire }}</td>
-        </tr>
+            <td nzWidth="30px" nzRight>
+                <div class="cursor" nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click">
+                    <i class="fa fa-bars"></i>
+                </div>
+                <nz-dropdown-menu #menu="nzDropdownMenu">
+                    <ul nz-menu>
+                        <li nz-menu-item class="text-primary" (click)="handle('isUpdate', true, data)">
+                            <i class="fa fa-edit"></i> Modifier
+                        </li>
+                        <li nz-menu-item class="text-danger" nz-popconfirm nzPopconfirmTitle="Êtes-vous sûr?"
+                            nzOkText="ok" nzCancelText="cancel" (nzOnConfirm)="handle('deleteClient', data)">
+                            <i class="fa fa-trash"></i> Supprimer
+                        </li>
+                    </ul>
+                </nz-dropdown-menu>
+
+            </td>
     </tbody>
 </nz-table>

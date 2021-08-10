@@ -19,13 +19,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("clients")
+@RequestMapping
 @RequiredArgsConstructor
 public class ClientController {
 
     private final ClientService clientService;
 
-    @GetMapping
+    @GetMapping("clients")
     public ResponseEntity<Page<Client>> getByType(
             @Or({
                     @Spec(path="id", params="id", spec= Equal.class),
@@ -36,21 +36,21 @@ public class ClientController {
                 .body(this.clientService.getAllClient(specification, pageable));
     }
 
-    @PostMapping
+    @PostMapping("client")
     public ResponseEntity<Client> save(@RequestBody Client client) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/clients").toUriString());
         return ResponseEntity
                 .created(uri).body(this.clientService.save(client));
     }
 
-    @PutMapping
-    public ResponseEntity<Client> update(@RequestBody Client client) {
+    @PutMapping("client/{id}")
+    public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody Client client) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/clients").toUriString());
         return ResponseEntity
                 .created(uri).body(this.clientService.update(client));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("client/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         this.clientService.delete(id);
         return ResponseEntity.ok().build();

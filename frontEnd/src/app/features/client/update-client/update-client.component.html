@@ -1,7 +1,6 @@
-<nz-drawer [nzMaskClosable]="false" [nzWidth]="'70%'" [nzVisible]="isAdd" nzTitle="Create"
+<nz-drawer [nzMaskClosable]="false" [nzWidth]="'70%'" [nzVisible]="isUpdate" nzTitle="Modifier un client"
     (nzOnClose)="handle('close', false)">
     <form nz-form [formGroup]="validateForm" (ngSubmit)="handle('submit')">
-
         <div class="container">
             <div class="row clearfix">
                 <div class="col-lg-4 col-md-4 col-sm-12">
@@ -47,8 +46,8 @@
 
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <nz-form-item class="form-group float-right">
-                        <button type="submit" class="btn btn-primary btn-round btn-block">
-                            <i class="fa fa-plus mr-1"></i> Ajouter
+                        <button type="submit" class="btn btn-warning btn-round btn-block">
+                            <i class="fa fa-edit mr-1"></i> Modifier
                         </button>
                     </nz-form-item>
                 </div>

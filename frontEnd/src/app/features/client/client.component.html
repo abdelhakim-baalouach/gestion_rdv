@@ -7,14 +7,10 @@
                 <div class="card planned_task">
                     <div class="header">
                         <h2>Gestion Client</h2>
-                        <ul class="header-dropdown dropdown">
-                            <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a>
-                            </li>
-                        </ul>
                     </div>
                     <div class="body">
                         <div class="table-responsive">
-                            <app-list-client></app-list-client>
+                            <app-list-client [events]="eventsSubject.asObservable()"></app-list-client>
                         </div>
                     </div>
                 </div>

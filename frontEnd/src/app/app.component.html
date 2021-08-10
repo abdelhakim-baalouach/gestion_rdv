@@ -1,7 +1,7 @@
-<ng-container *ngIf="href == '/login'">
+<ng-container *ngIf="!isLoading()">
     <router-outlet></router-outlet>
 </ng-container>
-<ng-container *ngIf="href != '/login'">
+<ng-container *ngIf="isLoading()">
     <!-- Overlay For Sidebars -->
     <div class="overlay"></div>
     <div id="wrapper">

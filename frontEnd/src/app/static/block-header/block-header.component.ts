@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-block-header',
   templateUrl: './block-header.component.html',
-  styleUrls: ['./block-header.component.css']
+  styleUrls: []
 })
 export class BlockHeaderComponent implements OnInit {
   @Input() title: string

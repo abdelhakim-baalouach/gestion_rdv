@@ -93,6 +93,7 @@ import { UtilisateurComponent } from './features/utilisateur/utilisateur.compone
 import { BlockHeaderComponent } from './static/block-header/block-header.component';
 import { AddClientComponent } from './features/client/add-client/add-client.component';
 import { ListClientComponent } from './features/client/list-client/list-client.component';
+import { UpdateClientComponent } from './features/client/update-client/update-client.component';
 
 
 @NgModule({
@@ -110,7 +111,8 @@ import { ListClientComponent } from './features/client/list-client/list-client.c
     UtilisateurComponent,
     BlockHeaderComponent,
     AddClientComponent,
-    ListClientComponent
+    ListClientComponent,
+    UpdateClientComponent
   ],
   imports: [
     BrowserModule,

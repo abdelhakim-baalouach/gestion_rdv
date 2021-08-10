@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/core/service/authentification/auth.service'
 })
 export class AuthenticationComponent implements OnInit {
   auth: Authentification
-  validateForm: FormGroup
+  validateForm!: FormGroup
 
   constructor(
     private authService: AuthService,

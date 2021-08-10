@@ -5,16 +5,16 @@ import { Client } from 'src/app/core/model/client/client.model';
 import { ClientService } from 'src/app/core/service/client/client.service';
 
 @Component({
-  selector: 'app-add-client',
-  templateUrl: './add-client.component.html',
+  selector: 'app-update-client',
+  templateUrl: './update-client.component.html',
   styleUrls: []
 })
-export class AddClientComponent implements OnInit {
-  @Input() isAdd: boolean
-  @Output() close = new EventEmitter<boolean>();
+export class UpdateClientComponent implements OnInit {
+  @Input() client: Client
+  @Input() isUpdate: boolean
+  @Output() close = new EventEmitter<boolean>()
 
   validateForm!: FormGroup
-  client: Client
 
   constructor(
     private clientService: ClientService,
@@ -24,10 +24,11 @@ export class AddClientComponent implements OnInit {
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      nomContact: [null, [Validators.required]],
-      chiffreAffaire: [null, [Validators.required]],
-      telephone: [null, [Validators.required]],
-      adresse: [null, [Validators.required]],
+      id: [this.client.id, [Validators.required]],
+      nomContact: [this.client.nomContact, [Validators.required]],
+      chiffreAffaire: [this.client.chiffreAffaire, [Validators.required]],
+      telephone: [this.client.telephone, [Validators.required]],
+      adresse: [this.client.adresse, [Validators.required]],
     });
   }
 
@@ -37,10 +38,10 @@ export class AddClientComponent implements OnInit {
         if (this.validateForm.valid) {
           this.client = { ...this.validateForm.value }
           this.clientService
-            .add(this.client)
+            .update(this.client)
             .subscribe(
               () => {
-                this.message.success('Le client a été créé avec succès')
+                this.message.success('Le client a été modifié avec succès')
                 this.validateForm.reset()
                 this.handle('close')
               },
@@ -65,4 +66,5 @@ export class AddClientComponent implements OnInit {
         break
     }
   }
+
 }

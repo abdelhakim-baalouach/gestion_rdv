@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-client',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./client.component.css']
 })
 export class ClientComponent implements OnInit {
-
   isAdd: boolean = false
+  eventsSubject: Subject<void> = new Subject<void>();
+
   constructor() { }
 
   ngOnInit(): void {
@@ -17,8 +19,12 @@ export class ClientComponent implements OnInit {
     switch (selector) {
       case 'add':
         this.isAdd = $event
+        if (!$event) this.emitEventToChild()
         break;
     }
   }
 
+  emitEventToChild() {
+    this.eventsSubject.next();
+  }
 }

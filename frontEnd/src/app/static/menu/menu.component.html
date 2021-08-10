@@ -6,20 +6,20 @@
                     <ul class="metismenu">
                         <li routerLinkActive="active">
                             <a routerLink="gestion-rdv">
-                                <i class="icon-speedometer"></i>
+                                <i class="fa fa-calendar-check-o"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
                         <li class="header" *ngIf="isHasConfig === true">Configuration</li>
                         <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_ADMIN') === true">
                             <a routerLink="canal">
-                                <i class="icon-bubbles"></i>
+                                <i class="fa  fa-cogs"></i>
                                 <span>Canal</span>
                             </a>
                         </li>
                         <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_ADMIN') === true">
                             <a routerLink="client">
-                                <i class="icon-bubbles"></i>
+                                <i class="fa fa-address-card"></i>
                                 <span>Client</span>
                             </a>
                         </li>
@@ -31,13 +31,13 @@
                         </li>
                         <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_ADMIN') === true">
                             <a routerLink="secteur">
-                                <i class="icon-book-open"></i>
+                                <i class="fa fa-building"></i>
                                 <span>Secteur</span>
                             </a>
                         </li>
                         <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_ADMIN') === true">
                             <a routerLink="utilisateur">
-                                <i class="icon-check"></i>
+                                <i class="fa fa-users"></i>
                                 <span>Utilisateur</span>
                             </a>
                         </li>
