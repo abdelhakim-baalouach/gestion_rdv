@@ -11,7 +11,7 @@ import { ClientService } from 'src/app/core/service/client/client.service';
 })
 export class AddClientComponent implements OnInit {
   @Input() isAdd: boolean
-  @Output() close = new EventEmitter<boolean>();
+  @Output() close = new EventEmitter<boolean>()
 
   validateForm!: FormGroup
   client: Client

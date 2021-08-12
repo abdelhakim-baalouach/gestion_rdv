@@ -1,0 +1,65 @@
+<ng-container *ngIf="isUpdate">
+    <app-update-utilisateur [user]="user" [isUpdate]="isUpdate" (close)="handle('isUpdate', $event)">
+    </app-update-utilisateur>
+</ng-container>
+<app-search [placeholder]="'Recherche par username'" (data)="handle('search', $event)"></app-search>
+<nz-table #basicTable [nzData]="users" nzSize="small" nzShowSizeChanger [nzFrontPagination]="false" [nzPageSize]="size"
+    (nzQueryParams)="onQueryParamsChange($event)" [nzTotal]="totalElement" [nzLoading]="isLoading" nzSize="small"
+    appAutoHeightTableDirective nzScroll="false" [nzBordered]="true">
+    <thead>
+        <tr>
+            <th class="text-capitalize">Nom complet </th>
+            <th class="text-capitalize">Username</th>
+            <th class="text-capitalize">Status</th>
+            <ng-container *ngIf="isHaveOne">
+                <th nzWidth="30px" nzRight></th>
+            </ng-container>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data">
+            <td>{{ data.fullName }}</td>
+            <td>{{ data.username }}</td>
+            <td class="text-center">
+                <ng-container *ngIf="data.state == 'ACTIVE'">
+                    <i class="fa fa-check-square-o font-18 text-success"></i>
+                </ng-container>
+                <ng-container *ngIf="data.state == 'DEACTIVE'">
+                    <i class="fa fa-minus-square font-18 text-danger"></i>
+                </ng-container>
+            </td>
+            <ng-container *ngIf="isHaveOne">
+                <td nzWidth="30px" nzRight>
+                    <div class="cursor" nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <nz-dropdown-menu #menu="nzDropdownMenu">
+                        <ul nz-menu>
+                            <ng-container *ngIf="isHavePermission('ROLE_USER_UPDATE')">
+                                <li nz-menu-item class="text-primary" (click)="handle('isUpdate', true, data)">
+                                    <i class="fa fa-edit"></i> Modifier
+                                </li>
+                            </ng-container>
+                            <ng-container *ngIf="isHavePermission('ROLE_USER_STATUS')">
+                                <ng-container *ngIf="data.state == 'DEACTIVE'">
+                                    <li nz-menu-item class="text-danger" nz-popconfirm
+                                        nzPopconfirmTitle="Êtes-vous sûr?" nzOkText="ok" nzCancelText="cancel"
+                                        (nzOnConfirm)="handle('setStatus', data, 'ACTIVE')">
+                                        <i class="fa fa-check-square-o"></i> Activer
+                                    </li>
+                                </ng-container>
+                                <ng-container *ngIf="data.state == 'ACTIVE'">
+                                    <li nz-menu-item class="text-danger" nz-popconfirm
+                                        nzPopconfirmTitle="Êtes-vous sûr?" nzOkText="ok" nzCancelText="cancel"
+                                        (nzOnConfirm)="handle('setStatus', data, 'DEACTIVE')">
+                                        <i class="fa fa-minus-square"></i> Désactiver
+                                    </li>
+                                </ng-container>
+
+                            </ng-container>
+                        </ul>
+                    </nz-dropdown-menu>
+                </td>
+            </ng-container>
+    </tbody>
+</nz-table>

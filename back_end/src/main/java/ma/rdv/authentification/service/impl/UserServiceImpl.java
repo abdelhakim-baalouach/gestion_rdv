@@ -8,7 +8,9 @@ import ma.rdv.authentification.repository.RoleRepository;
 import ma.rdv.authentification.repository.UserRepository;
 import ma.rdv.authentification.service.UserService;
 import ma.rdv.authentification.utils.StateEnum;
+import ma.rdv.authentification.web.request.CreateUserRequest;
 import ma.rdv.authentification.web.request.RoleToUserRequest;
+import ma.rdv.authentification.web.request.SetStateRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -22,6 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,9 +45,35 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public void createUserWithRoles(CreateUserRequest request) {
+        log.info("Saving new user {} to the database", request.getUsername());
+        User user = new User(null, request.getFullName(), request.getUsername(), passwordEncoder.encode(request.getPassword()), StateEnum.ACTIVE, new ArrayList<>());
+        User savedUser = this.userRepository.saveAndFlush(user);
+        request
+                .getRoles()
+                .stream()
+                .forEach(
+                    role -> {
+                        log.info("Saving role {} to {} ", role,request.getUsername());
+                        savedUser.getRoles().add(
+                                this.roleRepository.findByName(role)
+                        );
+                    }
+                );
+    }
+
+    @Override
     public Role saveRole(Role role) {
         log.info("Saving new role {} to the database", role.getName());
         return this.roleRepository.save(role);
+    }
+
+    @Override
+    public void setStateUser(SetStateRequest setStateRequest) {
+        log.info("set state user by id {}", setStateRequest.getId());
+        User user = this.userRepository.findById(setStateRequest.getId()).get();
+        user.setState(setStateRequest.getStatus());
+        this.userRepository.save(user);
     }
 
     @Override

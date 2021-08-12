@@ -1,0 +1,67 @@
+<nz-drawer [nzMaskClosable]="false" [nzWidth]="'70%'" [nzVisible]="isUpdate" nzTitle="Modifier utilisateur"
+    (nzOnClose)="isClose(false)">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <nz-form-item class="form-group">
+                        <nz-form-control nzErrorTip="Merci de remplir le Nom Complet">
+                            <label for="fullName" class="control-label">Nom Complet</label>
+                            <input type="text" id="fullName" formControlName="fullName" class="form-control"
+                                placeholder="Nom Complet">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <nz-form-item class="form-group">
+                        <nz-form-control nzErrorTip="Merci de remplir Username">
+                            <label for="username" class="control-label">Username</label>
+                            <input type="text" id="username" formControlName="username" class="form-control"
+                                (change)="checkUsername($event.target.value)" placeholder="Username">
+                            <span class="text-danger" *ngIf="isCheckUsername === 2">Username est déja utilisé</span>
+                            <span class="text-success" *ngIf="isCheckUsername === 1">Username libre</span>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+
+                    <nz-form-item class="form-group">
+                        <nz-form-control nzErrorTip="Merci de remplir le mot de passe">
+                            <label for="password" class="control-label">Mot de passe</label>
+                            <input type="password" id="password" formControlName="password" class="form-control"
+                                placeholder="Mot de passe" (ngModelChange)="updateConfirmValidator()">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <nz-form-item class="form-group">
+                        <nz-form-control [nzErrorTip]="Confirmez">
+                            <label for="checkPassword" class="control-label">Confirmez le mot de passe</label>
+                            <input type="password" id="checkPassword" formControlName="checkPassword"
+                                class="form-control" placeholder="Confirmez le mot de passe">
+                            <ng-template #Confirmez let-control>
+                                <ng-container *ngIf="control.hasError('required')">
+                                    Merci de remplir la confirmation du mot de passe
+                                </ng-container>
+                                <ng-container *ngIf="control.hasError('confirm')">
+                                    Deux mots de passe que vous saisissez sont incohérents !
+                                </ng-container>
+                            </ng-template>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <nz-transfer [nzDataSource]="list" [nzOperations]="['à droite', 'à gauche']" nzShowSearch
+                        [nzFilterOption]="filterOption" (nzChange)="change($event)"></nz-transfer>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <nz-form-item class="form-group float-right">
+                        <button type="submit" class="btn btn-warning btn-round btn-block">
+                            <i class="fa fa-edit mr-1"></i> Modifier
+                        </button>
+                    </nz-form-item>
+                </div>
+            </div>
+        </div>
+    </form>
+</nz-drawer>

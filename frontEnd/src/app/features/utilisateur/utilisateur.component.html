@@ -1,1 +1,21 @@
-<p>utilisateur works!</p>
+<div id="main-content">
+    <app-block-header [title]="'Utilisateur'" [roleName]="'ROLE_USER_ADD'" [currentPage]="'utilisateur'"
+        (open)="handle('add', $event)"></app-block-header>
+    <app-add-utilisateur [isAdd]="isAdd" (close)="handle('add', $event)"></app-add-utilisateur>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12">
+                <div class="card planned_task">
+                    <div class="header">
+                        <h2>Gestion des utilisateurs</h2>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <app-list-utilisateur [events]="eventsSubject.asObservable()"></app-list-utilisateur>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

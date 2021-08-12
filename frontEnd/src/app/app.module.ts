@@ -95,6 +95,9 @@ import { AddClientComponent } from './features/client/add-client/add-client.comp
 import { ListClientComponent } from './features/client/list-client/list-client.component';
 import { UpdateClientComponent } from './features/client/update-client/update-client.component';
 import { SearchComponent } from './static/search/search.component';
+import { ListUtilisateurComponent } from './features/utilisateur/list-utilisateur/list-utilisateur.component';
+import { AddUtilisateurComponent } from './features/utilisateur/add-utilisateur/add-utilisateur.component';
+import { UpdateUtilisateurComponent } from './features/utilisateur/update-utilisateur/update-utilisateur.component';
 
 
 @NgModule({
@@ -114,7 +117,10 @@ import { SearchComponent } from './static/search/search.component';
     AddClientComponent,
     ListClientComponent,
     UpdateClientComponent,
-    SearchComponent
+    SearchComponent,
+    ListUtilisateurComponent,
+    AddUtilisateurComponent,
+    UpdateUtilisateurComponent
   ],
   imports: [
     BrowserModule,

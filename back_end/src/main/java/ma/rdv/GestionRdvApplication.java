@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @SpringBootApplication
-public class GestionRdvApplication implements CommandLineRunner {
+public class GestionRdvApplication{
 
 	private final UserService userService;
 
@@ -27,7 +27,7 @@ public class GestionRdvApplication implements CommandLineRunner {
 		SpringApplication.run(GestionRdvApplication.class, args);
 	}
 
-	@Override
+	//@Override
 	public void run(String... args) throws Exception {
 		User admin = new User(null, "Admin name", "role_admin", "1234", StateEnum.ACTIVE, new ArrayList<>());
 		userService.saveUser(admin);
@@ -72,23 +72,23 @@ public class GestionRdvApplication implements CommandLineRunner {
 		Role ROLE_USER = new Role(null, "ROLE_USER");
 		Role ROLE_USER_ADD = new Role(null, "ROLE_USER_ADD");
 		Role ROLE_USER_UPDATE = new Role(null, "ROLE_USER_UPDATE");
-		Role ROLE_USER_DELETE = new Role(null, "ROLE_USER_DELETE");
+		Role ROLE_USER_STATUS = new Role(null, "ROLE_USER_STATUS");
 
 		userService.saveRole(ROLE_USER);
 		userService.saveRole(ROLE_USER_ADD);
 		userService.saveRole(ROLE_USER_UPDATE);
-		userService.saveRole(ROLE_USER_DELETE);
+		userService.saveRole(ROLE_USER_STATUS);
 
 
 		RoleToUserRequest addROLE_USER = new RoleToUserRequest("role_admin", "ROLE_USER");
 		RoleToUserRequest addROLE_USER_ADD= new RoleToUserRequest("role_admin", "ROLE_USER_ADD");
 		RoleToUserRequest addROLE_USER_UPDATE = new RoleToUserRequest("role_admin", "ROLE_USER_UPDATE");
-		RoleToUserRequest addROLE_USER_DELETE = new RoleToUserRequest("role_admin", "ROLE_USER_DELETE");
+		RoleToUserRequest addROLE_USER_STATUS = new RoleToUserRequest("role_admin", "ROLE_USER_STATUS");
 
 		userService.addRoleToUser(addROLE_USER);
 		userService.addRoleToUser(addROLE_USER_ADD);
 		userService.addRoleToUser(addROLE_USER_UPDATE);
-		userService.addRoleToUser(addROLE_USER_DELETE);
+		userService.addRoleToUser(addROLE_USER_STATUS);
 
 
 	}
