@@ -98,6 +98,11 @@ import { SearchComponent } from './static/search/search.component';
 import { ListUtilisateurComponent } from './features/utilisateur/list-utilisateur/list-utilisateur.component';
 import { AddUtilisateurComponent } from './features/utilisateur/add-utilisateur/add-utilisateur.component';
 import { UpdateUtilisateurComponent } from './features/utilisateur/update-utilisateur/update-utilisateur.component';
+import { ListAppConfigComponent } from './features/_appConfig/list-app-config/list-app-config.component';
+import { AddAppConfigComponent } from './features/_appConfig/add-app-config/add-app-config.component';
+import { UpdateAppConfigComponent } from './features/_appConfig/update-app-config/update-app-config.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
+import { AuthGuardService } from './core/service/authentification/auth-guard.service';
 
 
 @NgModule({
@@ -120,7 +125,11 @@ import { UpdateUtilisateurComponent } from './features/utilisateur/update-utilis
     SearchComponent,
     ListUtilisateurComponent,
     AddUtilisateurComponent,
-    UpdateUtilisateurComponent
+    UpdateUtilisateurComponent,
+    ListAppConfigComponent,
+    AddAppConfigComponent,
+    UpdateAppConfigComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -185,6 +194,7 @@ import { UpdateUtilisateurComponent } from './features/utilisateur/update-utilis
   ],
   providers: [
     authInterceptorProviders,
+    AuthGuardService,
     { provide: NZ_I18N, useValue: fr_FR },
     { provide: APP_BASE_HREF, useValue: '/' },
     { provide: PersistenceResultHandler, useClass: AdditionalPersistenceResultHandler },

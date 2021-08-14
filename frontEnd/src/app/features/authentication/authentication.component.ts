@@ -8,7 +8,7 @@ import { AuthService } from 'src/app/core/service/authentification/auth.service'
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
-  styleUrls: ['./authentication.component.css']
+  styleUrls: []
 })
 export class AuthenticationComponent implements OnInit {
   auth: Authentification
@@ -20,7 +20,7 @@ export class AuthenticationComponent implements OnInit {
     private router: Router
   ) {
     if (this.authService.isLoggedIn) {
-      this.router.navigate(['gestion-rdv'])
+      this.router.navigate(['dashboard'])
     }
   }
 

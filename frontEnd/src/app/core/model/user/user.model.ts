@@ -7,14 +7,21 @@ export class User {
     roles?: Role[]
 }
 
+export class updateUserRequest {
+    fullName?: string
+    username?: string
+    roles?: Role[]
+}
+
 export class Role {
     id?: number
     name?: string
 }
 
-enum StateEnum {
+export enum StateEnum {
     ACTIVE = "ACTIVE",
     DEACTIVE = "DEACTIVE",
+    DELETED = "DELETED",
 }
 
 export class setState {

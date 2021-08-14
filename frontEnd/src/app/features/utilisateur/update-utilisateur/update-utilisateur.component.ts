@@ -38,15 +38,17 @@ export class UpdateUtilisateurComponent implements OnInit {
   submitForm(): void {
     if (this.checkList.length !== 0) {
       if (this.validateForm.valid) {
-        let request = { ...this.validateForm.value, roles: this.checkList, id: this.user.id }
-        /*this.userService.saveUser(request).subscribe(
+        let request = { ...this.validateForm.value, roles: this.checkList, username: this.user.username }
+        console.log(request)
+
+        this.userService.update(request).subscribe(
           () => {
             this.message.success('L\'utilisateur a été modifie avec succès')
             this.validateForm.reset()
             this.isClose(false)
           },
           (failed) => this.message.error(failed.error)
-        )*/
+        )
       } else {
         for (const i in this.validateForm.controls) {
           if (this.validateForm.controls.hasOwnProperty(i)) {
@@ -60,25 +62,10 @@ export class UpdateUtilisateurComponent implements OnInit {
     }
   }
 
-  updateConfirmValidator(): void {
-    Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity())
-  }
-
-  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
-    if (!control.value) {
-      return { required: true };
-    } else if (control.value !== this.validateForm.controls.password.value) {
-      return { confirm: true, error: true }
-    }
-    return {}
-  }
-
   init() {
     this.validateForm = this.fb.group({
       fullName: [this.user.fullName, [Validators.required]],
-      username: [this.user.username, [Validators.required]],
-      password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
+      username: [{ value: this.user.username, disabled: true }],
     })
     this.userService.initRoles().map(
       (item) => this.list.push({

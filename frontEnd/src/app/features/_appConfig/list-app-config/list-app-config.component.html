@@ -1,0 +1,43 @@
+<ng-container *ngIf="isUpdate">
+    <app-update-app-config [isUpdate]="isUpdate" [appConfig]="appConfig" [title]="'Modifier canal'"
+        (close)="handle('isUpdate', $event)"></app-update-app-config>
+</ng-container>
+<app-search [placeholder]="'Recherche par nom'" (data)="handle('search', $event)"></app-search>
+<nz-table #basicTable [nzData]="appConfigs" nzSize="small" nzShowSizeChanger [nzFrontPagination]="false"
+    [nzPageSize]="size" (nzQueryParams)="onQueryParamsChange($event)" [nzTotal]="totalElement" [nzLoading]="isLoading"
+    nzSize="small" appAutoHeightTableDirective nzScroll="false" [nzBordered]="true">
+    <thead>
+        <tr>
+            <th class="text-capitalize">Nom</th>
+            <ng-container *ngIf="isHaveOne">
+                <th nzWidth="30px" nzRight></th>
+            </ng-container>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of basicTable.data">
+            <td>{{ data.nom }}</td>
+            <ng-container *ngIf="isHaveOne">
+                <td nzWidth="30px" nzRight>
+                    <div class="cursor" nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <nz-dropdown-menu #menu="nzDropdownMenu">
+                        <ul nz-menu>
+                            <ng-container *ngIf="isHavePermission(roles.update)">
+                                <li nz-menu-item class="text-primary" (click)="handle('isUpdate', true, data)">
+                                    <i class="fa fa-edit"></i> Modifier
+                                </li>
+                            </ng-container>
+                            <ng-container *ngIf="isHavePermission(roles.delete)">
+                                <li nz-menu-item class="text-danger" nz-popconfirm nzPopconfirmTitle="Êtes-vous sûr?"
+                                    nzOkText="ok" nzCancelText="cancel" (nzOnConfirm)="handle('delete', data)">
+                                    <i class="fa fa-trash"></i> Supprimer
+                                </li>
+                            </ng-container>
+                        </ul>
+                    </nz-dropdown-menu>
+                </td>
+            </ng-container>
+    </tbody>
+</nz-table>

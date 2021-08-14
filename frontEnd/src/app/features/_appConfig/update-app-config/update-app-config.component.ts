@@ -1,53 +1,55 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { Client } from 'src/app/core/model/client/client.model';
-import { ClientService } from 'src/app/core/service/client/client.service';
+import { AppConfig, TypeEnum } from 'src/app/core/model/appConfig/appConfig.model';
+import { AppConfigService } from 'src/app/core/service/appConfig/app-config.service';
 
 @Component({
-  selector: 'app-add-client',
-  templateUrl: './add-client.component.html',
+  selector: 'app-update-app-config',
+  templateUrl: './update-app-config.component.html',
   styleUrls: []
 })
-export class AddClientComponent implements OnInit {
-  @Input() isAdd: boolean
+export class UpdateAppConfigComponent implements OnInit {
+  @Input() isUpdate: boolean
+  @Input() appConfig: AppConfig
+  @Input() title: string
   @Output() close = new EventEmitter<boolean>()
 
   validateForm!: FormGroup
-  client: Client
+  isConfirmLoading: boolean = false
 
   constructor(
-    private clientService: ClientService,
+    private appConfigService: AppConfigService,
     private fb: FormBuilder,
     private message: NzMessageService
   ) { }
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      nomContact: [null, [Validators.required]],
-      chiffreAffaire: [null, [Validators.required]],
-      telephone: [null, [Validators.required]],
-      adresse: [null, [Validators.required]],
+      nom: [this.appConfig.nom, [Validators.required]],
     })
   }
 
   handle(selector, $event?) {
     switch (selector) {
       case 'submit':
+        this.isConfirmLoading = true
         if (this.validateForm.valid) {
-          this.client = { ...this.validateForm.value }
-          this.clientService
-            .add(this.client)
+          this.appConfig = { ...this.appConfig, ...this.validateForm.value }
+          this.appConfigService
+            .update(this.appConfig)
             .subscribe(
               () => {
-                this.message.success('Le client a été créé avec succès')
-                this.validateForm.reset()
+                this.message.success('La modification a été effectuée avec succès')
+                this.validateForm.get("nom").reset()
+                this.isConfirmLoading = false
                 this.handle('close')
               },
               (failed) => this.message.error(failed.error)
             )
         } else {
           this.handle('forItemsForm')
+          this.isConfirmLoading = false
         }
         break
 
@@ -59,7 +61,6 @@ export class AddClientComponent implements OnInit {
           }
         }
         break
-
       case 'close':
         this.close.emit($event)
         break

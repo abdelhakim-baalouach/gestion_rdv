@@ -10,7 +10,7 @@
         <tr>
             <th class="text-capitalize">Nom complet </th>
             <th class="text-capitalize">Username</th>
-            <th class="text-capitalize">Status</th>
+            <th class="text-capitalize" nzWidth="30px" nzRight>Status</th>
             <ng-container *ngIf="isHaveOne">
                 <th nzWidth="30px" nzRight></th>
             </ng-container>
@@ -20,14 +20,18 @@
         <tr *ngFor="let data of basicTable.data">
             <td>{{ data.fullName }}</td>
             <td>{{ data.username }}</td>
-            <td class="text-center">
-                <ng-container *ngIf="data.state == 'ACTIVE'">
+            <ng-container *ngIf="data.state == 'ACTIVE'">
+                <td class="text-center" nzTooltipTitle="Active" nzTooltipPlacement="top" nz-button nz-tooltip
+                    nzWidth="30px" nzRight>
                     <i class="fa fa-check-square-o font-18 text-success"></i>
-                </ng-container>
-                <ng-container *ngIf="data.state == 'DEACTIVE'">
+                </td>
+            </ng-container>
+            <ng-container *ngIf="data.state == 'DEACTIVE'">
+                <td class="text-center" nzTooltipTitle="Inactive" nzTooltipPlacement="top" nz-button nz-tooltip
+                    nzWidth="30px">
                     <i class="fa fa-minus-square font-18 text-danger"></i>
-                </ng-container>
-            </td>
+                </td>
+            </ng-container>
             <ng-container *ngIf="isHaveOne">
                 <td nzWidth="30px" nzRight>
                     <div class="cursor" nz-dropdown [nzDropdownMenu]="menu" nzTrigger="click">

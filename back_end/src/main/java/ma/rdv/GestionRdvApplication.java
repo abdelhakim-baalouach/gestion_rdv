@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @SpringBootApplication
-public class GestionRdvApplication{
+public class GestionRdvApplication {
 
 	private final UserService userService;
 
@@ -90,6 +90,79 @@ public class GestionRdvApplication{
 		userService.addRoleToUser(addROLE_USER_UPDATE);
 		userService.addRoleToUser(addROLE_USER_STATUS);
 
+		/**
+		 * ACL ROLE_CANAL
+		 */
 
+		Role ROLE_CANAL = new Role(null, "ROLE_CANAL");
+		Role ROLE_CANAL_ADD = new Role(null, "ROLE_CANAL_ADD");
+		Role ROLE_CANAL_UPDATE = new Role(null, "ROLE_CANAL_UPDATE");
+		Role ROLE_CANAL_DELETE = new Role(null, "ROLE_CANAL_DELETE");
+
+		userService.saveRole(ROLE_CANAL);
+		userService.saveRole(ROLE_CANAL_ADD);
+		userService.saveRole(ROLE_CANAL_UPDATE);
+		userService.saveRole(ROLE_CANAL_DELETE);
+
+
+		RoleToUserRequest addROLE_CANAL = new RoleToUserRequest("role_admin", "ROLE_CANAL");
+		RoleToUserRequest addROLE_CANAL_ADD= new RoleToUserRequest("role_admin", "ROLE_CANAL_ADD");
+		RoleToUserRequest addROLE_CANAL_UPDATE = new RoleToUserRequest("role_admin", "ROLE_CANAL_UPDATE");
+		RoleToUserRequest addROLE_CANAL_DELETE = new RoleToUserRequest("role_admin", "ROLE_CANAL_DELETE");
+
+		userService.addRoleToUser(addROLE_CANAL);
+		userService.addRoleToUser(addROLE_CANAL_ADD);
+		userService.addRoleToUser(addROLE_CANAL_UPDATE);
+		userService.addRoleToUser(addROLE_CANAL_DELETE);
+
+		/**
+		 * ACL ROLE_TYPE_RDV
+		 */
+
+		Role ROLE_TYPE_RDV = new Role(null, "ROLE_TYPE_RDV");
+		Role ROLE_TYPE_RDV_ADD = new Role(null, "ROLE_TYPE_RDV_ADD");
+		Role ROLE_TYPE_RDV_UPDATE = new Role(null, "ROLE_TYPE_RDV_UPDATE");
+		Role ROLE_TYPE_RDV_DELETE = new Role(null, "ROLE_TYPE_RDV_DELETE");
+
+		userService.saveRole(ROLE_TYPE_RDV);
+		userService.saveRole(ROLE_TYPE_RDV_ADD);
+		userService.saveRole(ROLE_TYPE_RDV_UPDATE);
+		userService.saveRole(ROLE_TYPE_RDV_DELETE);
+
+
+		RoleToUserRequest addROLE_TYPE_RDVL = new RoleToUserRequest("role_admin", "ROLE_TYPE_RDV");
+		RoleToUserRequest addROLE_TYPE_RDV_ADD= new RoleToUserRequest("role_admin", "ROLE_TYPE_RDV_ADD");
+		RoleToUserRequest addROLE_TYPE_RDV_UPDATE= new RoleToUserRequest("role_admin", "ROLE_TYPE_RDV_UPDATE");
+		RoleToUserRequest addROLE_TYPE_RDV_DELETE= new RoleToUserRequest("role_admin", "ROLE_TYPE_RDV_DELETE");
+
+		userService.addRoleToUser(addROLE_TYPE_RDVL);
+		userService.addRoleToUser(addROLE_TYPE_RDV_ADD);
+		userService.addRoleToUser(addROLE_TYPE_RDV_UPDATE);
+		userService.addRoleToUser(addROLE_TYPE_RDV_DELETE);
+
+		/**
+		 * ACL ROLE_SECTEUR
+		 */
+
+		Role ROLE_SECTEUR = new Role(null, "ROLE_SECTEUR");
+		Role ROLE_SECTEUR_ADD = new Role(null, "ROLE_SECTEUR_ADD");
+		Role ROLE_SECTEUR_UPDATE = new Role(null, "ROLE_SECTEUR_UPDATE");
+		Role ROLE_SECTEUR_DELETE = new Role(null, "ROLE_SECTEUR_DELETE");
+
+		userService.saveRole(ROLE_SECTEUR);
+		userService.saveRole(ROLE_SECTEUR_ADD);
+		userService.saveRole(ROLE_SECTEUR_UPDATE);
+		userService.saveRole(ROLE_SECTEUR_DELETE);
+
+
+		RoleToUserRequest addROLE_SECTEUR= new RoleToUserRequest("role_admin", "ROLE_SECTEUR");
+		RoleToUserRequest addROLE_SECTEUR_ADD= new RoleToUserRequest("role_admin", "ROLE_SECTEUR_ADD");
+		RoleToUserRequest addROLE_SECTEUR_UPDATE= new RoleToUserRequest("role_admin", "ROLE_SECTEUR_UPDATE");
+		RoleToUserRequest addROLE_SECTEUR_DELETE= new RoleToUserRequest("role_admin", "ROLE_SECTEUR_DELETE");
+
+		userService.addRoleToUser(addROLE_SECTEUR);
+		userService.addRoleToUser(addROLE_SECTEUR_ADD);
+		userService.addRoleToUser(addROLE_SECTEUR_UPDATE);
+		userService.addRoleToUser(addROLE_SECTEUR_DELETE);
 	}
 }

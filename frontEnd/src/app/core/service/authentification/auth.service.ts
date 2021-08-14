@@ -44,7 +44,7 @@ export class AuthService {
         (success) => {
           localStorage.setItem("token", success.access_token)
           this.messageService.success(this.message["200"])
-          this.router.navigate(['gestion-rdv'])
+          this.router.navigate(['dashboard'])
         },
         (failed) => {
           this.messageService.warning(this.message[failed.status])

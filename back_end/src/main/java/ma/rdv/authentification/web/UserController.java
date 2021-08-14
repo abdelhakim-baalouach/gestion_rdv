@@ -8,6 +8,7 @@ import ma.rdv.authentification.utils.NotDeletedUserSpec;
 import ma.rdv.authentification.web.request.CreateUserRequest;
 import ma.rdv.authentification.web.request.RoleToUserRequest;
 import ma.rdv.authentification.web.request.SetStateRequest;
+import ma.rdv.authentification.web.request.UpdateUserRequest;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
 import net.kaczmarzyk.spring.data.jpa.domain.Like;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Or;
@@ -53,10 +54,13 @@ public class UserController {
                 .ok().build();
     }
 
-    @PostMapping("roles/addToUser")
-    public ResponseEntity<?> saveRole(@RequestBody RoleToUserRequest roleToUserRequest) {
-        this.userService.addRoleToUser(roleToUserRequest);
+    @PutMapping("user")
+    public ResponseEntity<?> update(@RequestBody UpdateUserRequest request) {
+        //this.userService.setStateUser(setState);
+        this.userService.updateUserWithRoles(request);
         return ResponseEntity
                 .ok().build();
     }
+
+
 }

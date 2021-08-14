@@ -1,1 +1,24 @@
-<p>type-rdv works!</p>
+<div id="main-content">
+    <app-block-header [title]="'Type RDV'" [roleName]="'ROLE_TYPE_RDV_ADD'" [currentPage]="'type RDV'"
+        (open)="handle('add', $event)"></app-block-header>
+    <app-add-app-config [typeEnum]="typeEnum" [title]="'Ajouter type RDV'" [isAdd]="isAdd"
+        (close)="handle('add', $event)">
+    </app-add-app-config>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12">
+                <div class="card planned_task">
+                    <div class="header">
+                        <h2>Gestion des types RDV</h2>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <app-list-app-config [roles]="roles" [typeEnum]="typeEnum"
+                                [events]="eventsSubject.asObservable()"></app-list-app-config>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

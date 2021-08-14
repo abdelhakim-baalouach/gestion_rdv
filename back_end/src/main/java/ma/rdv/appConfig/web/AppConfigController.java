@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import ma.rdv.appConfig.domain.AppConfig;
 import ma.rdv.appConfig.service.AppConfigService;
 import ma.rdv.appConfig.utils.NotDeletedAppConfigSpec;
-import ma.rdv.authentification.domain.User;
-import ma.rdv.authentification.utils.NotDeletedUserSpec;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
+import net.kaczmarzyk.spring.data.jpa.domain.Like;
+import net.kaczmarzyk.spring.data.jpa.web.annotation.Conjunction;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Or;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 import org.springframework.data.domain.Page;
@@ -18,38 +18,40 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping
 @RequiredArgsConstructor
 public class AppConfigController {
     private final AppConfigService appConfigService;
 
-    @GetMapping("/appconfis")
+    @GetMapping("appconfigs")
     public ResponseEntity<Page<AppConfig>> getByType(
-            @Or({
-                    @Spec(path="id", params="id", spec= Equal.class),
-                    @Spec(path="typeEnum", params="typeEnum", spec= Equal.class),
-            })  NotDeletedAppConfigSpec specification, Pageable pageable
-    ) {
+            @Conjunction(value = {
+                    @Or({
+                            @Spec(path="nom", params="nom", spec= Like.class)
+                    }),
+            }, and = @Spec(path="typeEnum", params="typeEnum", spec= Equal.class))
+                NotDeletedAppConfigSpec specification, Pageable pageable
+        ) {
         return ResponseEntity
                 .ok()
                 .body(this.appConfigService.getAllByType(specification, pageable));
     }
 
-    @PostMapping("/appconfis")
+    @PostMapping("appconfig")
     public ResponseEntity<AppConfig> save(@RequestBody AppConfig appConfig) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/appconfis").toUriString());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("appconfig").toUriString());
         return ResponseEntity
                 .created(uri).body(this.appConfigService.save(appConfig));
     }
 
-    @PutMapping("/appconfis")
-    public ResponseEntity<AppConfig> update(@RequestBody AppConfig appConfig) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/appconfis").toUriString());
+    @PutMapping("appconfig/{id}")
+    public ResponseEntity<AppConfig> update(@PathVariable Long id, @RequestBody AppConfig appConfig) {
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("appconfig").toUriString());
         return ResponseEntity
                 .created(uri).body(this.appConfigService.update(appConfig));
     }
 
-    @DeleteMapping("/appconfis/{id}")
+    @DeleteMapping("appconfig/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         this.appConfigService.delete(id);
         return ResponseEntity.ok().build();

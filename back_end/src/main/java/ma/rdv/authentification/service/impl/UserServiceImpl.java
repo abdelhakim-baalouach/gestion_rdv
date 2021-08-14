@@ -11,6 +11,8 @@ import ma.rdv.authentification.utils.StateEnum;
 import ma.rdv.authentification.web.request.CreateUserRequest;
 import ma.rdv.authentification.web.request.RoleToUserRequest;
 import ma.rdv.authentification.web.request.SetStateRequest;
+import ma.rdv.authentification.web.request.UpdateUserRequest;
+import ma.rdv.error.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -60,6 +62,32 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                         );
                     }
                 );
+    }
+
+    @Override
+    public void updateUserWithRoles(UpdateUserRequest request) {
+        log.info("Update user {} to the database", request.getUsername());
+        this.userRepository
+                .findByUsername(request.getUsername())
+                .ifPresentOrElse(
+                        user -> {
+                            user.setFullName(request.getFullName());
+                            user.setRoles(new ArrayList<>());
+                            request
+                                    .getRoles()
+                                    .stream()
+                                    .forEach(
+                                            roleName -> {
+                                                log.info("Add role {} to username {}", roleName, user.getUsername());
+                                                user.getRoles().add(this.roleRepository.findByName(roleName));
+                                            }
+                                    );
+                        },
+                        () -> {
+                            new ResourceNotFoundException("User not exist");
+                        }
+                );
+
     }
 
     @Override

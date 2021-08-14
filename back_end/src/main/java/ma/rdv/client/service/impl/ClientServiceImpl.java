@@ -7,7 +7,9 @@ import ma.rdv.client.domain.Client;
 import ma.rdv.client.repository.ClientRepository;
 import ma.rdv.client.service.ClientService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +23,12 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public Page<Client> getAllClient(Specification<Client> specification, Pageable pageable) {
         log.info("Fetching client: page {} and size {}", pageable.getPageNumber(), pageable.getPageSize());
-        return this.clientRepository.findAll(specification, pageable);
+        Pageable sortedByNom = PageRequest.of(
+                pageable.getPageNumber(),
+                pageable.getPageSize(),
+                Sort.by("nomContact").ascending()
+        );
+        return this.clientRepository.findAll(specification, sortedByNom);
     }
 
     @Override

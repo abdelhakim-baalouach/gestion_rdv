@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CanalComponent } from './canal.component';
+import { UpdateAppConfigComponent } from './update-app-config.component';
 
-describe('CanalComponent', () => {
-  let component: CanalComponent;
-  let fixture: ComponentFixture<CanalComponent>;
+describe('UpdateAppConfigComponent', () => {
+  let component: UpdateAppConfigComponent;
+  let fixture: ComponentFixture<UpdateAppConfigComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CanalComponent ]
+      declarations: [ UpdateAppConfigComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CanalComponent);
+    fixture = TestBed.createComponent(UpdateAppConfigComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

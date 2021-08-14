@@ -5,6 +5,7 @@ import { PageNotFoundComponent } from './error/page-not-found/page-not-found.com
 import { AuthenticationComponent } from './features/authentication/authentication.component';
 import { CanalComponent } from './features/canal/canal.component';
 import { ClientComponent } from './features/client/client.component';
+import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { GestionRdvComponent } from './features/gestion-rdv/gestion-rdv.component';
 import { SecteurComponent } from './features/secteur/secteur.component';
 import { TypeRdvComponent } from './features/type-rdv/type-rdv.component';
@@ -13,6 +14,7 @@ import { UtilisateurComponent } from './features/utilisateur/utilisateur.compone
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: AuthenticationComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'client', component: ClientComponent, canActivate: [AuthGuardService] },
   { path: 'gestion-rdv', component: GestionRdvComponent, canActivate: [AuthGuardService] },
   { path: 'canal', component: CanalComponent, canActivate: [AuthGuardService] },

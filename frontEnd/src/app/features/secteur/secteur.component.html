@@ -1,1 +1,24 @@
-<p>secteur works!</p>
+<div id="main-content">
+    <app-block-header [title]="'Secteur'" [roleName]="'ROLE_SECTEUR_ADD'" [currentPage]="'secteur'"
+        (open)="handle('add', $event)"></app-block-header>
+    <app-add-app-config [typeEnum]="typeEnum" [title]="'Ajouter secteur'" [isAdd]="isAdd"
+        (close)="handle('add', $event)">
+    </app-add-app-config>
+    <div class="container-fluid">
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12">
+                <div class="card planned_task">
+                    <div class="header">
+                        <h2>Gestion des secteur</h2>
+                    </div>
+                    <div class="body">
+                        <div class="table-responsive">
+                            <app-list-app-config [roles]="roles" [typeEnum]="typeEnum"
+                                [events]="eventsSubject.asObservable()"></app-list-app-config>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

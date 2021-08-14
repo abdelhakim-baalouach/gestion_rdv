@@ -5,9 +5,15 @@
                 <nav class="sidebar-nav sidebar-scroll">
                     <ul class="metismenu">
                         <li routerLinkActive="active">
+                            <a routerLink="dashboard">
+                                <i class="fa fa-dashboard"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active">
                             <a routerLink="gestion-rdv">
                                 <i class="fa fa-calendar-check-o"></i>
-                                <span>Dashboard</span>
+                                <span>Gestion RDV</span>
                             </a>
                         </li>
                         <li class="header" *ngIf="isHasConfig === true">Configuration</li>
@@ -25,7 +31,7 @@
                         </li>
                         <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_TYPE_RDV') === true">
                             <a routerLink="type-rdv">
-                                <i class="icon-calendar"></i>
+                                <i class="fa fa-calendar"></i>
                                 <span>Type RDV</span>
                             </a>
                         </li>

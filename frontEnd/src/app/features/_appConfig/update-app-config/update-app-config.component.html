@@ -1,0 +1,25 @@
+<nz-modal [(nzVisible)]="isUpdate" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+    (nzOnCancel)="handle('close', false)">
+    <ng-template #modalTitle>{{title}}</ng-template>
+    <ng-template #modalContent>
+        <form nz-form [formGroup]="validateForm">
+            <div class="container">
+                <div class="row clearfix">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <nz-form-item class="form-group">
+                            <nz-form-control nzErrorTip="Merci de remplir le nom">
+                                <label for="nom" class="control-label">Nom</label>
+                                <input type="text" id="nom" formControlName="nom" class="form-control"
+                                    placeholder="Nom">
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template #modalFooter>
+        <button nz-button nzType="default" (click)="handle('close', false)">Annuler</button>
+        <button nz-button nzType="warning" (click)="handle('submit')" [nzLoading]="isConfirmLoading">Modifier</button>
+    </ng-template>
+</nz-modal>

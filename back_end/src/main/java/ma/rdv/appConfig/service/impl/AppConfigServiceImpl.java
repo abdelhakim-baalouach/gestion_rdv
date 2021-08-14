@@ -7,7 +7,9 @@ import ma.rdv.appConfig.repository.AppConfigRepository;
 import ma.rdv.appConfig.service.AppConfigService;
 import ma.rdv.authentification.utils.StateEnum;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +24,12 @@ public class AppConfigServiceImpl implements AppConfigService {
     @Override
     public Page<AppConfig> getAllByType(Specification<AppConfig> specification, Pageable pageable) {
         log.info("Fetching appConfig by Typ, page {} and size {}", pageable.getPageNumber(), pageable.getPageSize());
-        return this.appConfigRepository.findAll(specification, pageable);
+        Pageable sortedByNom = PageRequest.of(
+                pageable.getPageNumber(),
+                pageable.getPageSize(),
+                Sort.by("nom").ascending()
+        );
+        return this.appConfigRepository.findAll(specification, sortedByNom);
     }
 
     @Override
