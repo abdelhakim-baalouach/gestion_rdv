@@ -15,7 +15,8 @@ import java.util.List;
 @EnableJpaRepositories(value = {
         "ma.rdv.authentification.repository",
         "ma.rdv.client.repository",
-        "ma.rdv.appConfig.repository"
+        "ma.rdv.appConfig.repository",
+        "ma.rdv.gestionRdv.repository"
 }, repositoryFactoryBeanClass = EnversRevisionRepositoryFactoryBean.class)
 public class DatabaseConfiguration implements WebMvcConfigurer {
 

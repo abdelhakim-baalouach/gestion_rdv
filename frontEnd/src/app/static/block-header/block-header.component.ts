@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AuthGuardService } from 'src/app/core/service/authentification/auth-guard.service';
 import { AuthService } from 'src/app/core/service/authentification/auth.service';
 
 @Component({

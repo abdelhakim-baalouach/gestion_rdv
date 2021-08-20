@@ -44,7 +44,7 @@ export class AuthService {
         (success) => {
           localStorage.setItem("token", success.access_token)
           this.messageService.success(this.message["200"])
-          this.router.navigate(['dashboard'])
+          this.router.navigate(['gestion-rdv'])
         },
         (failed) => {
           this.messageService.warning(this.message[failed.status])
@@ -73,6 +73,7 @@ export class AuthService {
 
   getRoles(): [] {
     const token = localStorage.getItem("token")
+    if (!token) this.logout()
     const decodedToken = this.helper.decodeToken(token)
     return decodedToken.roles
   }

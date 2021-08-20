@@ -20,7 +20,7 @@ export class AuthenticationComponent implements OnInit {
     private router: Router
   ) {
     if (this.authService.isLoggedIn) {
-      this.router.navigate(['dashboard'])
+      this.router.navigate(['gestion-rdv'])
     }
   }
 

@@ -7,6 +7,7 @@ import ma.rdv.client.service.ClientService;
 import ma.rdv.client.utils.NotDeletedClientSpec;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
 import net.kaczmarzyk.spring.data.jpa.domain.Like;
+import net.kaczmarzyk.spring.data.jpa.domain.LikeIgnoreCase;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Or;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
 import org.springframework.data.domain.Page;
@@ -30,7 +31,7 @@ public class ClientController {
     public ResponseEntity<Page<Client>> getByType(
             @Or({
                     //@Spec(path="id", params="q", spec= Equal.class),
-                    @Spec(path="nomContact", params="nomContact", spec= Like.class),
+                    @Spec(path="nomContact", params="nomContact", spec= LikeIgnoreCase.class),
             }) NotDeletedClientSpec specification, Pageable pageable
     ) {
         return ResponseEntity

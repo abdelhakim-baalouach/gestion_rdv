@@ -33,14 +33,6 @@ public class GestionRdvApplication {
 		userService.saveUser(admin);
 
 		/**
-		 * for test
-		 */
-		Role ROLE_ADMIN = new Role(null, "ROLE_ADMIN");
-		userService.saveRole(ROLE_ADMIN);
-		RoleToUserRequest addRoleAdmin = new RoleToUserRequest("role_admin", "ROLE_ADMIN");
-		userService.addRoleToUser(addRoleAdmin);
-
-		/**
 		 * ACL Client
 		 */
 
@@ -164,5 +156,40 @@ public class GestionRdvApplication {
 		userService.addRoleToUser(addROLE_SECTEUR_ADD);
 		userService.addRoleToUser(addROLE_SECTEUR_UPDATE);
 		userService.addRoleToUser(addROLE_SECTEUR_DELETE);
+
+		/**
+		 * ACL ROLE_RDV
+		 */
+
+		Role ROLE_RDV = new Role(null, "ROLE_RDV");
+		Role ROLE_RDV_ADD = new Role(null, "ROLE_RDV_ADD");
+		Role ROLE_RDV_UPDATE = new Role(null, "ROLE_RDV_UPDATE");
+		Role ROLE_RDV_DELETE = new Role(null, "ROLE_RDV_DELETE");
+
+		userService.saveRole(ROLE_RDV);
+		userService.saveRole(ROLE_RDV_ADD);
+		userService.saveRole(ROLE_RDV_UPDATE);
+		userService.saveRole(ROLE_RDV_DELETE);
+
+
+		RoleToUserRequest addROLE_RDV= new RoleToUserRequest("role_admin", "ROLE_RDV");
+		RoleToUserRequest addROLE_RDV_ADD = new RoleToUserRequest("role_admin", "ROLE_RDV_ADD");
+		RoleToUserRequest addROLE_RDV_UPDATE= new RoleToUserRequest("role_admin", "ROLE_RDV_UPDATE");
+		RoleToUserRequest addROLE_RDV_DELETE= new RoleToUserRequest("role_admin", "ROLE_RDV_DELETE");
+
+		userService.addRoleToUser(addROLE_RDV);
+		userService.addRoleToUser(addROLE_RDV_ADD);
+		userService.addRoleToUser(addROLE_RDV_UPDATE);
+		userService.addRoleToUser(addROLE_RDV_DELETE);
+
+		/**
+		 * ACL ROLE_STATISTIQUE
+		 */
+
+		Role ROLE_STATISTIQUE = new Role(null, "ROLE_STATISTIQUE");
+		userService.saveRole(ROLE_STATISTIQUE);
+		RoleToUserRequest addROLE_STATISTIQUE= new RoleToUserRequest("role_admin", "ROLE_STATISTIQUE");
+		userService.addRoleToUser(addROLE_STATISTIQUE);
+
 	}
 }

@@ -103,6 +103,7 @@ import { AddAppConfigComponent } from './features/_appConfig/add-app-config/add-
 import { UpdateAppConfigComponent } from './features/_appConfig/update-app-config/update-app-config.component';
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { AuthGuardService } from './core/service/authentification/auth-guard.service';
+import { AddRdvComponent } from './features/gestion-rdv/add-rdv/add-rdv.component';
 
 
 @NgModule({
@@ -129,7 +130,8 @@ import { AuthGuardService } from './core/service/authentification/auth-guard.ser
     ListAppConfigComponent,
     AddAppConfigComponent,
     UpdateAppConfigComponent,
-    DashboardComponent
+    DashboardComponent,
+    AddRdvComponent
   ],
   imports: [
     BrowserModule,

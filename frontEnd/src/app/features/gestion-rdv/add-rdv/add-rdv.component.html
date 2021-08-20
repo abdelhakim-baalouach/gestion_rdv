@@ -1,0 +1,130 @@
+<nz-drawer [nzMaskClosable]="false" [nzWidth]="'70%'" [nzVisible]="isAdd" nzTitle="Ajouter RDV"
+    (nzOnClose)="handle('close', false)">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="handle('submit')">
+
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <nz-form-item class="form-group">
+                        <nz-form-control nzErrorTip="Merci de remplir le nom de personne">
+                            <label for="fullName" class="control-label">Nom de personne</label>
+                            <input type="text" id="fullName" formControlName="fullName" class="form-control"
+                                placeholder="Nom de personne">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <nz-form-item class="form-group">
+                        <nz-form-control nzErrorTip="Merci de remplir le numero de téléphone">
+                            <label for="telephone" class="control-label">Téléphone</label>
+                            <input type="tel" id="telephone" formControlName="telephone" class="form-control"
+                                placeholder="Téléphone">
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-group">
+                        <nz-form-control nzErrorTip="Merci de sélectionner le Type RDV">
+                            <label for="client" class="control-label">Société</label>
+                            <nz-select class="w-100" nzPlaceHolder="Société" (nzOnSearch)="handle('SOCIETE', $event)"
+                                formControlName="client" nzShowSearch nzAllowClear>
+                                <nz-option *ngFor="let client of clients" [nzValue]="client"
+                                    [nzLabel]="client.nomContact">
+                                </nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <nz-form-item class="form-group">
+                        <nz-form-control nzErrorTip="Merci de sélectionner la Nature du contact">
+                            <label for="natureContact" class="control-label">Nature du contact</label>
+                            <nz-radio-group id="natureContact" class="w-100 text-center" formControlName="natureContact"
+                                nzButtonStyle="solid">
+                                <label nz-radio-button class="width-40" nzValue="VISITE">Visite</label>
+                                <label nz-radio-button class="width-60" nzValue="TELECONFERENCE">Téléconférence</label>
+                            </nz-radio-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <nz-form-item class="form-group">
+                        <nz-form-control nzErrorTip="Merci de sélectionner la Nature du contact">
+                            <label for="typeAdequatRDV" class="control-label">type de client adéquat à ce RDV</label>
+                            <nz-radio-group id="typeAdequatRDV" class="w-100 text-center"
+                                formControlName="typeAdequatRDV" nzButtonStyle="solid">
+                                <label nz-radio-button class="w-50" nzValue="PROSPECT">Prospect</label>
+                                <label nz-radio-button class="w-50" nzValue="ASSURE">Assuré</label>
+                            </nz-radio-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <nz-form-item class="form-group">
+                        <nz-form-control nzErrorTip="Merci de remplir la date">
+                            <label for="dateRdv" class="control-label">Date RDV</label>
+                            <nz-date-picker id="dateRdv" formControlName="dateRdv" placeholder="Date RDV"
+                                class="form-control" nzFormat="yyyy-MM-dd HH:mm" [nzDisabledDate]="disabledDate"
+                                [nzShowTime]="true"></nz-date-picker>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-group">
+                        <nz-form-control nzErrorTip="Merci de sélectionner le Secteur">
+                            <label for="secteur" class="control-label">Secteur</label>
+                            <nz-select class="w-100" nzPlaceHolder="Secteur" (nzOnSearch)="handle('SECTEUR', $event)"
+                                formControlName="secteur" nzShowSearch nzAllowClear>
+                                <nz-option *ngFor="let secteur of secteurs" [nzValue]="secteur" [nzLabel]="secteur.nom">
+                                </nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-group">
+                        <nz-form-control nzErrorTip="Merci de sélectionner le Canal">
+                            <label for="canal" class="control-label">Canal</label>
+                            <nz-select class="w-100" nzPlaceHolder="Canal" (nzOnSearch)="handle('CANAL', $event)"
+                                formControlName="canal" nzShowSearch nzAllowClear>
+                                <nz-option *ngFor="let canal of canals" [nzValue]="canal" [nzLabel]="canal.nom">
+                                </nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="form-group">
+                        <nz-form-control nzErrorTip="Merci de sélectionner le Type RDV">
+                            <label for="type_rdv" class="control-label">Type RDV</label>
+                            <nz-select class="w-100" nzPlaceHolder="Type RDV" (nzOnSearch)="handle('TYPE_RDV', $event)"
+                                formControlName="type_rdv" nzShowSearch nzAllowClear>
+                                <nz-option *ngFor="let type_rdv of typeRdvs" [nzValue]="type_rdv"
+                                    [nzLabel]="type_rdv.nom">
+                                </nz-option>
+                            </nz-select>
+                        </nz-form-control>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="form-group">
+                        <nz-form-control nzErrorTip="Maximale de 254 caractères">
+                            <label for="raison" class="control-label">Raison saison social</label>
+                            <nz-textarea-count [nzMaxCharacterCount]="254">
+                                <textarea rows="4" formControlName="raison" nz-input></textarea>
+                            </nz-textarea-count>
+                        </nz-form-control>
+                    </div>
+                </div>
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <nz-form-item class="form-group float-right">
+                        <button type="submit" class="btn btn-primary btn-round btn-block">
+                            <i class="fa fa-plus mr-1"></i> Ajouter
+                        </button>
+                    </nz-form-item>
+                </div>
+            </div>
+        </div>
+    </form>
+</nz-drawer>

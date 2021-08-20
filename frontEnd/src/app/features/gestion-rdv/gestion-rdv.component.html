@@ -1,1 +1,121 @@
-<p>gestion-rdv works!</p>
+<div id="main-content">
+    <div class="block-header">
+        <div class="row clearfix">
+            <div class="col-md-6 col-sm-12">
+                <h2>Gestion RDV</h2>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)"><i class="fa fa-cube"></i></a></li>
+                        <li class="breadcrumb-item active" aria-current="page">gestion RDV</li>
+                    </ol>
+                </nav>
+            </div>
+            <ng-container *ngIf="isHavePermission('ROLE_RDV_ADD')">
+                <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                    <a href="javascript:void(0);" class="btn btn-sm btn-primary btn-round"
+                        (click)="handle('add', true)">Ajouter</a>
+                </div>
+                <ng-container *ngIf="isAdd">
+                    <app-add-rdv [isAdd]="isAdd" (close)="handle('add', $event)"></app-add-rdv>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-8 col-md-12">
+                <div class="card">
+                    <div class="body">
+                        <div class="table-responsive">
+                            <div class="input-group mb-3">
+                                <nz-date-picker class="width-60" [(ngModel)]="date" (ngModelChange)="onChange($event)">
+                                </nz-date-picker>
+                            </div>
+                            <nz-table #basicTable [nzData]="gestionRdvs" nzSize="small" nzShowSizeChanger
+                                [nzFrontPagination]="false" [nzPageSize]="size"
+                                (nzQueryParams)="onQueryParamsChange($event)" [nzTotal]="totalElement"
+                                [nzLoading]="isLoading" nzSize="small" appAutoHeightTableDirective nzScroll="false"
+                                [nzBordered]="true">
+                                <thead>
+                                    <thead>
+                                        <tr>
+                                            <th>Nom de personne</th>
+                                            <th>Téléphone</th>
+                                            <th>Société</th>
+                                            <th>Date de RDV</th>
+                                            <ng-container *ngIf="isHaveOne">
+                                                <th nzWidth="30px" nzRight></th>
+                                            </ng-container>
+                                        </tr>
+                                    </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of basicTable.data">
+                                        <td>{{data.fullName}}</td>
+                                        <td>{{data.telephone}}</td>
+                                        <td>{{data.client.nomContact}}</td>
+                                        <td>{{data.dateRdv | date:'dd/MM/yyyy HH:mm z'}}</td>
+                                        <ng-container *ngIf="isHaveOne">
+                                            <td nzWidth="30px" nzRight>
+                                                <div class="cursor" nz-dropdown [nzDropdownMenu]="menu"
+                                                    nzTrigger="click">
+                                                    <i class="fa fa-bars"></i>
+                                                </div>
+                                                <nz-dropdown-menu #menu="nzDropdownMenu">
+                                                    <ul nz-menu>
+                                                        <ng-container *ngIf="isHavePermission('ROLE_RDV_UPDATE')">
+                                                            <li nz-menu-item class="text-primary"
+                                                                (click)="handle('isUpdate', true, data)">
+                                                                <i class="fa fa-edit"></i> Modifier
+                                                            </li>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="isHavePermission('ROLE_RDV_DELETE')">
+                                                            <li nz-menu-item class="text-danger" nz-popconfirm
+                                                                nzPopconfirmTitle="Êtes-vous sûr?" nzOkText="ok"
+                                                                nzCancelText="cancel"
+                                                                (nzOnConfirm)="handle('deleteClient', data)">
+                                                                <i class="fa fa-trash"></i> Supprimer
+                                                            </li>
+                                                        </ng-container>
+                                                    </ul>
+                                                </nz-dropdown-menu>
+                                            </td>
+                                        </ng-container>
+                                    </tr>
+                                </tbody>
+                            </nz-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <div class="card">
+                    <div class="body">
+                        <div class="container">
+                            <nz-skeleton [nzLoading]="isLoading">
+                                <ng-container *ngIf="timelines.length > 0">
+                                    <nz-timeline>
+                                        <nz-timeline-item nzColor="green" *ngFor="let item of timelines">
+                                            <div>
+                                                <span>{{item.dateRdv | date:"dd/MM/yyyy HH:mm z"}}</span><br />
+                                                <span>{{item.typeAdequatRDV}} - {{item.natureContact}}</span>
+                                            </div>
+                                            <div>
+                                                <h6>{{item.fullName}}</h6>
+                                                <h6>{{item.telephone}}</h6>
+                                                <p>{{item.raison}}</p>
+                                            </div>
+                                        </nz-timeline-item>
+                                    </nz-timeline>
+                                </ng-container>
+                                <ng-container *ngIf="timelines.length == 0">
+                                    <nz-empty></nz-empty>
+                                </ng-container>
+                            </nz-skeleton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

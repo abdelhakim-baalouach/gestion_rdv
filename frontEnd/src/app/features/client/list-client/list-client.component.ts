@@ -129,12 +129,6 @@ export class ListClientComponent implements OnInit {
     this.handle('getClients')
   }
 
-  getNextPage() {
-    this.page++
-    this.isLoading = false
-    this.handle('getClients')
-  }
-
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
   }

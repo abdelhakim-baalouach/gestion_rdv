@@ -16,13 +16,18 @@ const entityMetadata: EntityMetadataMap = {
             totalElements: 0,
         },
     },
+    GestionRdv: {
+        additionalCollectionState: {
+            totalElements: 0,
+        },
+    }
 };
 
-// because the plural of "hero" is not "heros"
 const pluralNames = {
     Client: 'clients',
     User: 'users',
-    AppConfig: 'appConfigs',
+    AppConfig: 'appconfigs',
+    GestionRdv: 'gestionrdvs',
 };
 
 export const entityConfig = {

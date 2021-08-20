@@ -135,12 +135,6 @@ export class ListUtilisateurComponent implements OnInit {
     this.handle('getAll')
   }
 
-  getNextPage() {
-    this.page++
-    this.isLoading = false
-    this.handle('getAll')
-  }
-
   ngOnDestroy() {
     this.eventsSubscription.unsubscribe();
   }

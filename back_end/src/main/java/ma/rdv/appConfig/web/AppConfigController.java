@@ -6,6 +6,7 @@ import ma.rdv.appConfig.service.AppConfigService;
 import ma.rdv.appConfig.utils.NotDeletedAppConfigSpec;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
 import net.kaczmarzyk.spring.data.jpa.domain.Like;
+import net.kaczmarzyk.spring.data.jpa.domain.LikeIgnoreCase;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Conjunction;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Or;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Spec;
@@ -27,7 +28,7 @@ public class AppConfigController {
     public ResponseEntity<Page<AppConfig>> getByType(
             @Conjunction(value = {
                     @Or({
-                            @Spec(path="nom", params="nom", spec= Like.class)
+                            @Spec(path="nom", params="nom", spec= LikeIgnoreCase.class)
                     }),
             }, and = @Spec(path="typeEnum", params="typeEnum", spec= Equal.class))
                 NotDeletedAppConfigSpec specification, Pageable pageable

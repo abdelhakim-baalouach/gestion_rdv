@@ -54,6 +54,13 @@ export class UserService extends EntityCollectionServiceBase<User> {
     roles.push({ role: 'ROLE_SECTEUR_UPDATE', text: "Modifier secteur" })
     roles.push({ role: 'ROLE_SECTEUR_DELETE', text: "Supprimer secteur" })
 
+    roles.push({ role: 'ROLE_RDV', text: "Affiche les RDVs" })
+    roles.push({ role: 'ROLE_RDV_ADD', text: "Ajouter RDV" })
+    roles.push({ role: 'ROLE_RDV_UPDATE', text: "Modifier RDV" })
+    roles.push({ role: 'ROLE_RDV_DELETE', text: "Supprimer RDV" })
+
+    roles.push({ role: 'ROLE_STATISTIQUE', text: "Afficher les statistique" })
+
     return roles
   }
 }

@@ -18,7 +18,7 @@ export class MenuComponent implements OnInit {
 
   isHavePermission($event): boolean {
     const isTrue = this.authService.isHaveRole($event)
-    if (isTrue) this.isHasConfig = true
+    if (isTrue && $event !== "ROLE_STATISTIQUE" && $event !== "ROLE_RDV") this.isHasConfig = true
     return isTrue
   }
 

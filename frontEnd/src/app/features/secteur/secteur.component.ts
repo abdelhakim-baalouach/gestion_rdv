@@ -16,7 +16,7 @@ export class SecteurComponent implements OnInit {
   eventsSubject: Subject<void> = new Subject<void>()
 
   constructor() {
-    this.typeEnum = TypeEnum.TYPE_RDV
+    this.typeEnum = TypeEnum.SECTEUR
     this.roles = {
       update: "ROLE_SECTEUR_UPDATE",
       delete: "ROLE_SECTEUR_DELETE"

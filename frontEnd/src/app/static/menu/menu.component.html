@@ -4,13 +4,13 @@
             <div class="tab-pane active" id="Home-icon">
                 <nav class="sidebar-nav sidebar-scroll">
                     <ul class="metismenu">
-                        <li routerLinkActive="active">
+                        <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_STATISTIQUE') === true">
                             <a routerLink="dashboard">
                                 <i class="fa fa-dashboard"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
-                        <li routerLinkActive="active">
+                        <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_RDV') === true">
                             <a routerLink="gestion-rdv">
                                 <i class="fa fa-calendar-check-o"></i>
                                 <span>Gestion RDV</span>
@@ -24,9 +24,9 @@
                             </a>
                         </li>
                         <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_CLIENT') === true">
-                            <a routerLink="client">
+                            <a routerLink="societe">
                                 <i class="fa fa-address-card"></i>
-                                <span>Client</span>
+                                <span>Société</span>
                             </a>
                         </li>
                         <li routerLinkActive="active" *ngIf="isHavePermission('ROLE_TYPE_RDV') === true">
