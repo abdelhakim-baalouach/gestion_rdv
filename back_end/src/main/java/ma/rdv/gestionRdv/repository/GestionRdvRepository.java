@@ -1,5 +1,6 @@
 package ma.rdv.gestionRdv.repository;
 
+import ma.rdv.authentification.utils.StateEnum;
 import ma.rdv.gestionRdv.domain.GestionRdv;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,5 +13,5 @@ import java.util.Date;
 
 @Repository
 public interface GestionRdvRepository extends JpaRepository<GestionRdv, Long>, JpaSpecificationExecutor<GestionRdv> {
-    Page<GestionRdv> findAllByDateOrderByTimeAsc(Date date, Pageable pageable);
+    Page<GestionRdv> findAllByDateAndStateOrderByTimeAsc(Date date, StateEnum stateEnum, Pageable pageable);
 }

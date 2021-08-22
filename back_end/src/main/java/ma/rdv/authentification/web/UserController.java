@@ -5,10 +5,7 @@ import ma.rdv.authentification.domain.Role;
 import ma.rdv.authentification.domain.User;
 import ma.rdv.authentification.service.UserService;
 import ma.rdv.authentification.utils.NotDeletedUserSpec;
-import ma.rdv.authentification.web.request.CreateUserRequest;
-import ma.rdv.authentification.web.request.RoleToUserRequest;
-import ma.rdv.authentification.web.request.SetStateRequest;
-import ma.rdv.authentification.web.request.UpdateUserRequest;
+import ma.rdv.authentification.web.request.*;
 import net.kaczmarzyk.spring.data.jpa.domain.Equal;
 import net.kaczmarzyk.spring.data.jpa.domain.Like;
 import net.kaczmarzyk.spring.data.jpa.web.annotation.Or;
@@ -61,6 +58,14 @@ public class UserController {
         return ResponseEntity
                 .ok().build();
     }
+
+    @PutMapping("user/password")
+    public ResponseEntity<?> updatePassword(@RequestBody UpdatePassword request) {
+        this.userService.updatePassword(request);
+        return ResponseEntity
+                .ok().build();
+    }
+
 
 
 }

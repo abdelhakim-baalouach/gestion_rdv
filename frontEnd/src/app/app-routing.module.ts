@@ -31,9 +31,9 @@ const routes: Routes = [
     component: ClientComponent,
     canActivate: [AuthGuardService],
     children: [
-      { path: 'societe', component: AddClientComponent, canActivate: [AuthGuardService] },
-      { path: 'societe', component: ListClientComponent, canActivate: [AuthGuardService] },
-      { path: 'societe', component: UpdateClientComponent, canActivate: [AuthGuardService] }
+      { path: '', component: AddClientComponent, canActivate: [AuthGuardService] },
+      { path: '', component: ListClientComponent, canActivate: [AuthGuardService] },
+      { path: '', component: UpdateClientComponent, canActivate: [AuthGuardService] }
     ]
   },
   {
@@ -41,8 +41,8 @@ const routes: Routes = [
     component: GestionRdvComponent,
     canActivate: [AuthGuardService],
     children: [
-      { path: 'gestion-rdv', component: AddRdvComponent, canActivate: [AuthGuardService] },
-      { path: 'gestion-rdv', component: UpdateRdvComponent, canActivate: [AuthGuardService] },
+      { path: '', component: AddRdvComponent, canActivate: [AuthGuardService] },
+      { path: '', component: UpdateRdvComponent, canActivate: [AuthGuardService] },
     ]
   },
   {
@@ -50,9 +50,9 @@ const routes: Routes = [
     component: CanalComponent,
     canActivate: [AuthGuardService],
     children: [
-      { path: 'canal', component: AddAppConfigComponent, canActivate: [AuthGuardService] },
-      { path: 'canal', component: ListAppConfigComponent, canActivate: [AuthGuardService] },
-      { path: 'canal', component: UpdateAppConfigComponent, canActivate: [AuthGuardService] }
+      { path: '', component: AddAppConfigComponent, canActivate: [AuthGuardService] },
+      { path: '', component: ListAppConfigComponent, canActivate: [AuthGuardService] },
+      { path: '', component: UpdateAppConfigComponent, canActivate: [AuthGuardService] }
     ]
   },
   {
@@ -60,9 +60,9 @@ const routes: Routes = [
     component: TypeRdvComponent,
     canActivate: [AuthGuardService],
     children: [
-      { path: 'type-rdv', component: AddAppConfigComponent, canActivate: [AuthGuardService] },
-      { path: 'type-rdv', component: ListAppConfigComponent, canActivate: [AuthGuardService] },
-      { path: 'type-rdv', component: UpdateAppConfigComponent, canActivate: [AuthGuardService] }
+      { path: '', component: AddAppConfigComponent, canActivate: [AuthGuardService] },
+      { path: '', component: ListAppConfigComponent, canActivate: [AuthGuardService] },
+      { path: '', component: UpdateAppConfigComponent, canActivate: [AuthGuardService] }
     ]
   },
   {
@@ -70,9 +70,9 @@ const routes: Routes = [
     component: SecteurComponent,
     canActivate: [AuthGuardService],
     children: [
-      { path: 'secteur', component: AddAppConfigComponent, canActivate: [AuthGuardService] },
-      { path: 'secteur', component: ListAppConfigComponent, canActivate: [AuthGuardService] },
-      { path: 'secteur', component: UpdateAppConfigComponent, canActivate: [AuthGuardService] }
+      { path: '', component: AddAppConfigComponent, canActivate: [AuthGuardService] },
+      { path: '', component: ListAppConfigComponent, canActivate: [AuthGuardService] },
+      { path: '', component: UpdateAppConfigComponent, canActivate: [AuthGuardService] }
     ]
   },
   {
@@ -80,9 +80,9 @@ const routes: Routes = [
     component: UtilisateurComponent,
     canActivate: [AuthGuardService],
     children: [
-      { path: 'utilisateur', component: AddUtilisateurComponent, canActivate: [AuthGuardService] },
-      { path: 'utilisateur', component: ListUtilisateurComponent, canActivate: [AuthGuardService] },
-      { path: 'utilisateur', component: UpdateUtilisateurComponent, canActivate: [AuthGuardService] }
+      { path: '', component: AddUtilisateurComponent, canActivate: [AuthGuardService] },
+      { path: '', component: ListUtilisateurComponent, canActivate: [AuthGuardService] },
+      { path: '', component: UpdateUtilisateurComponent, canActivate: [AuthGuardService] }
     ]
   },
   { path: '**', component: PageNotFoundComponent },

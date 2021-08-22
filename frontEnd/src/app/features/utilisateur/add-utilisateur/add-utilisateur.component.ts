@@ -7,7 +7,7 @@ import { UserService } from 'src/app/core/service/user/user.service';
 @Component({
   selector: 'app-add-utilisateur',
   templateUrl: './add-utilisateur.component.html',
-  styleUrls: ['./add-utilisateur.component.css']
+  styleUrls: []
 })
 export class AddUtilisateurComponent implements OnInit {
   @Input() isAdd: boolean

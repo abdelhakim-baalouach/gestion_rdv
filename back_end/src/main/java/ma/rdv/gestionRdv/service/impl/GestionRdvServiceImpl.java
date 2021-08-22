@@ -30,7 +30,7 @@ public class GestionRdvServiceImpl implements GestionRdvService {
     @Override
     public Page<GestionRdv> getAll(Date date, Pageable pageable) {
         log.info("Fetching GestionRdv: page {} and size {}", pageable.getPageNumber(), pageable.getPageSize());
-        return this.gestionRdvRepository.findAllByDateOrderByTimeAsc(date, pageable);
+        return this.gestionRdvRepository.findAllByDateAndStateOrderByTimeAsc(date, StateEnum.ACTIVE, pageable);
     }
 
     @Override

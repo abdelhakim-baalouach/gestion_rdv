@@ -23,6 +23,10 @@ export class UserService extends EntityCollectionServiceBase<User> {
     return this._http.put<any>("/api/user", request);
   }
 
+  updatePassword(request): Observable<any> {
+    return this._http.put<any>("/api/user/password", request);
+  }
+
   saveUser(request): Observable<any> {
     return this._http.post<any>("/api/userWithRoles", request);
   }

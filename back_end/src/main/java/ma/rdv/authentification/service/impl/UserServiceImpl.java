@@ -8,10 +8,7 @@ import ma.rdv.authentification.repository.RoleRepository;
 import ma.rdv.authentification.repository.UserRepository;
 import ma.rdv.authentification.service.UserService;
 import ma.rdv.authentification.utils.StateEnum;
-import ma.rdv.authentification.web.request.CreateUserRequest;
-import ma.rdv.authentification.web.request.RoleToUserRequest;
-import ma.rdv.authentification.web.request.SetStateRequest;
-import ma.rdv.authentification.web.request.UpdateUserRequest;
+import ma.rdv.authentification.web.request.*;
 import ma.rdv.error.ResourceNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -88,6 +85,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                         }
                 );
 
+    }
+
+    @Override
+    public void updatePassword(UpdatePassword request) {
+        log.info("Update password username {}", request.getUsername());
+        this.userRepository
+                .findByUsername(request.getUsername())
+                .ifPresent(
+                        user -> {
+                            user.setPassword(passwordEncoder.encode(request.getPassword()));
+                            this.userRepository.save(user);
+                        }
+                );
     }
 
     @Override
