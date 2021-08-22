@@ -40,7 +40,7 @@ export class GestionRdvComponent implements OnInit {
     this.isHaveOnePermission()
   }
 
-  handle(selector, $event?) {
+  handle(selector, $event?, $data?) {
     switch (selector) {
       case 'close':
         this.close.emit($event)
@@ -64,6 +64,7 @@ export class GestionRdvComponent implements OnInit {
             success => {
               this.gestionRdvs = success
               this.timelines = this.removeByDate(success)
+
               this.handle('getInStore')
 
             },
@@ -74,6 +75,25 @@ export class GestionRdvComponent implements OnInit {
       case 'add':
         this.isAdd = $event
         if (!this.isAdd) this.handle('getAll')
+        break
+
+      case 'isUpdate':
+        this.isUpdate = $event
+        this.gestionRdv = $data
+        if (!this.isUpdate) this.handle('getAll')
+        break
+
+      case 'delete':
+        this.rdvService
+          .delete($event)
+          .subscribe(
+            () => {
+              this.message.success("Le RDV a été supprimé avec succès")
+              this.isLoading = false
+              this.handle('getAll')
+            },
+            (failed) => this.message.error(failed.error)
+          )
         break
     }
   }

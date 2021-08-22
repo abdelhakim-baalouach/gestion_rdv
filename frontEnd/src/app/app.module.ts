@@ -104,6 +104,7 @@ import { UpdateAppConfigComponent } from './features/_appConfig/update-app-confi
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { AuthGuardService } from './core/service/authentification/auth-guard.service';
 import { AddRdvComponent } from './features/gestion-rdv/add-rdv/add-rdv.component';
+import { UpdateRdvComponent } from './features/gestion-rdv/update-rdv/update-rdv.component';
 
 
 @NgModule({
@@ -131,7 +132,8 @@ import { AddRdvComponent } from './features/gestion-rdv/add-rdv/add-rdv.componen
     AddAppConfigComponent,
     UpdateAppConfigComponent,
     DashboardComponent,
-    AddRdvComponent
+    AddRdvComponent,
+    UpdateRdvComponent,
   ],
   imports: [
     BrowserModule,

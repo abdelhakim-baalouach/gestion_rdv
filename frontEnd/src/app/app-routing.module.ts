@@ -11,6 +11,7 @@ import { UpdateClientComponent } from './features/client/update-client/update-cl
 import { DashboardComponent } from './features/dashboard/dashboard.component';
 import { AddRdvComponent } from './features/gestion-rdv/add-rdv/add-rdv.component';
 import { GestionRdvComponent } from './features/gestion-rdv/gestion-rdv.component';
+import { UpdateRdvComponent } from './features/gestion-rdv/update-rdv/update-rdv.component';
 import { SecteurComponent } from './features/secteur/secteur.component';
 import { TypeRdvComponent } from './features/type-rdv/type-rdv.component';
 import { AddUtilisateurComponent } from './features/utilisateur/add-utilisateur/add-utilisateur.component';
@@ -41,6 +42,7 @@ const routes: Routes = [
     canActivate: [AuthGuardService],
     children: [
       { path: 'gestion-rdv', component: AddRdvComponent, canActivate: [AuthGuardService] },
+      { path: 'gestion-rdv', component: UpdateRdvComponent, canActivate: [AuthGuardService] },
     ]
   },
   {

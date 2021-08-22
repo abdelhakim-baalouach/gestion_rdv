@@ -11,12 +11,16 @@
                 </nav>
             </div>
             <ng-container *ngIf="isHavePermission('ROLE_RDV_ADD')">
-                <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                <div class="col-md-6 col-sm-12 text-right">
                     <a href="javascript:void(0);" class="btn btn-sm btn-primary btn-round"
                         (click)="handle('add', true)">Ajouter</a>
                 </div>
                 <ng-container *ngIf="isAdd">
                     <app-add-rdv [isAdd]="isAdd" (close)="handle('add', $event)"></app-add-rdv>
+                </ng-container>
+                <ng-container *ngIf="isUpdate">
+                    <app-update-rdv [isUpdate]="isUpdate" [gestionRdv]="gestionRdv"
+                        (close)="handle('isUpdate', $event)"></app-update-rdv>
                 </ng-container>
             </ng-container>
         </div>
@@ -73,7 +77,7 @@
                                                             <li nz-menu-item class="text-danger" nz-popconfirm
                                                                 nzPopconfirmTitle="Êtes-vous sûr?" nzOkText="ok"
                                                                 nzCancelText="cancel"
-                                                                (nzOnConfirm)="handle('deleteClient', data)">
+                                                                (nzOnConfirm)="handle('delete', data)">
                                                                 <i class="fa fa-trash"></i> Supprimer
                                                             </li>
                                                         </ng-container>

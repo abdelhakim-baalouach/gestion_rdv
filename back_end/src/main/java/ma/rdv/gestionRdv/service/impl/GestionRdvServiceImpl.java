@@ -14,13 +14,8 @@ import ma.rdv.gestionRdv.service.GestionRdvService;
 import ma.rdv.gestionRdv.web.request.RdvRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Service
@@ -51,6 +46,9 @@ public class GestionRdvServiceImpl implements GestionRdvService {
     @Override
     public GestionRdv update(GestionRdv request) {
         log.info("Update RDV ID {}", request.getId());
+        long epochMilli = request.getDateRdv().toInstant().toEpochMilli();
+        request.setDate(new Date(epochMilli));
+        request.setTime(new Date(epochMilli));
         return this.gestionRdvRepository.saveAndFlush(request);
     }
 

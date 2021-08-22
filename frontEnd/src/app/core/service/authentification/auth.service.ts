@@ -80,6 +80,6 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token')
-    this.router.navigate(['login'])
+    window.location.reload()
   }
 }
